@@ -1,0 +1,21 @@
+INICIO DE ARCHIVO
+HABITACIONES
+
+
+ARCOS
+
+
+ENEMIGOS
+4
+Corredor;10;3;0.8
+Chasqueador;20;7;0.6
+Hinchado;50;12;0.4
+Mercenario;15;5;0.9
+
+EVENTOS
+
+
+MEJORAS DE COMBATE
+
+
+FIN DE ARCHIVO
