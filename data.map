@@ -1,16 +1,16 @@
-INICIO DE ARCHIVO
+INICIO DEL ARCHIVO
 HABITACIONES
 
 
-ARCOS
+CONEXIONES
 
 
 ENEMIGOS
 4
-Corredor;10;3;0.8
-Chasqueador;20;7;0.6
-Hinchado;50;12;0.4
-Mercenario;15;5;0.9
+Corredor | Vida 10 | Ataque 3 | presicion 0.8 | Probabilidad 0.9
+Chasqueador | Vida 20 | Ataque 7 | presicion 0.6 | Probabilidad 0.7
+Hinchado | Vida 50 | Ataque 12 | presicion 0.4 | Probabilidad 0.2
+Mercenario | Vida 15 | Ataque 5 | presicion 0.9 | Probabilidad 0.5
 
 EVENTOS
 
@@ -18,4 +18,4 @@ EVENTOS
 MEJORAS DE COMBATE
 
 
-FIN DE ARCHIVO
+FIN DEL ARCHIVO

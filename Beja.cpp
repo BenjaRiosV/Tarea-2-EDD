@@ -1,5 +1,3 @@
-// Main de la Tarea 2 EDD
-
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -321,8 +319,46 @@ public:
     }
 };
 
-
-int main() {
+class Mapa {
+private:
+    static const int MAX_HABITACIONES = 100;
+    // Arreglo de punteros a todas las habitaciones, indexado por su ID.
+    NodoHabitacion* raiz;
+    NodoHabitacion* todas_las_habitaciones[MAX_HABITACIONES];
+    int total_habitaciones_cargadas; // Contador de habitaciones realmente cargadas
     
-    return 0;
-}
+public:
+    // Constructor
+    Mapa() {
+        total_habitaciones_cargadas = 0;
+        raiz = nullptr;
+        for (int i = 0; i < MAX_HABITACIONES; ++i) {
+            todas_las_habitaciones[i] = nullptr;
+        }
+    }
+
+    // Destructor
+    ~Mapa() {
+        for (int i = 0; i < MAX_HABITACIONES; ++i) {
+            if (todas_las_habitaciones[i] != nullptr) {
+                delete todas_las_habitaciones[i];
+                todas_las_habitaciones[i] = nullptr;
+            }
+        }
+    }
+
+    // Método para cargar la estructura completa del mapa desde un archivo.
+    void cargarMapaDesdeArchivo(const string& nombre_archivo) {
+        cout << "Iniciando carga del mapa desde: " << nombre_archivo << "..." << endl;
+    
+        ifstream archivo(nombre_archivo);
+        if (!archivo.is_open()) {
+            cerr << "ERROR: No se pudo abrir el archivo de mapa: " << nombre_archivo << endl;
+            return;
+        }
+        string linea;
+        while (linea != "FIN DEL ARCHIVO") {
+            getline(archivo, linea);
+            } 
+        }
+    };
