@@ -1014,7 +1014,7 @@ int main() {
 
     // Crear y cargar el mapa del juego
     ArbolTernario mi_arbol;
-    if (!mi_arbol.cargarMapa("ejemploTarea.map")) {
+    if (!mi_arbol.cargarMapa("ejemplo.map")) {
         cout << "Fallo al cargar el mapa. Saliendo del juego." << endl;
         return 1;
     }
