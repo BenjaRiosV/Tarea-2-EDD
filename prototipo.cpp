@@ -569,12 +569,12 @@ public:
                 getline(archivo, line); // Debería leer '&'
                 continue;
             }
-            if (line.find("MEJORAS_DE_COMBATE") != string::npos) {
+            if (line.find("MEJORAS DE COMBATE") != string::npos) {
                 current_section = 5;
                 // Las siguientes líneas se leerán directamente en el switch
                 continue;
             }
-            if (line.find("FIN_DE_ARCHIVO") != string::npos) {
+            if (line.find("FIN DE ARCHIVO") != string::npos) {
                 current_section = 0; // Terminar procesamiento
                 break;
             }
@@ -731,20 +731,45 @@ public:
                     }
                     break;
                 }
-                case 5: { // MEJORAS_DE_COMBATE
+                case 5: { // MEJORAS DE COMBATE
                     // Formato: +X Vida / +X Precision / +X Ataque / +X Recuperacion
-                    // No hay un contador para estas, se leen una por una y luego se sale de la sección
-
-                    if (line.find("Vida") != string::npos) {
-                        mejoras_combate_cargadas.vida = stoi(line.substr(0, line.find(" Vida")));
-                    } else if (line.find("Precision") != string::npos) {
-                        mejoras_combate_cargadas.precision = stod(line.substr(0, line.find(" Precision")));
-                    } else if (line.find("Ataque") != string::npos) {
-                        mejoras_combate_cargadas.ataque = stoi(line.substr(0, line.find(" Ataque")));
-                    } else if (line.find("Recuperacion") != string::npos) {
-                        mejoras_combate_cargadas.recuperacion = stoi(line.substr(0, line.find(" Recuperacion")));
-                    }
-                    break;
+                        string valor_a_convertir;
+                        size_t pos_palabra_clave;
+        
+                        if (line.find("Vida") != string::npos) {
+                            pos_palabra_clave = line.find(" Vida");
+                            if (pos_palabra_clave != string::npos) {
+                                valor_a_convertir = line.substr(0, pos_palabra_clave);
+                                mejoras_combate_cargadas.vida = stoi(valor_a_convertir);
+                            } else {
+                                cerr << "ERROR: ' Vida' no encontrado en linea de Vida: '" << line << "'" << endl;
+                            }
+                        } else if (line.find("Precision") != string::npos) {
+                            pos_palabra_clave = line.find(" Precision");
+                            if (pos_palabra_clave != string::npos) {
+                                valor_a_convertir = line.substr(0, pos_palabra_clave);
+                                mejoras_combate_cargadas.precision = stod(valor_a_convertir);
+                            } else {
+                                cerr << "ERROR: ' Precision' no encontrado en linea de Precision: '" << line << "'" << endl;
+                            }
+                        } else if (line.find("Ataque") != string::npos) {
+                            pos_palabra_clave = line.find(" Ataque");
+                            if (pos_palabra_clave != string::npos) {
+                                valor_a_convertir = line.substr(0, pos_palabra_clave);
+                                mejoras_combate_cargadas.ataque = stoi(valor_a_convertir);
+                            } else {
+                                cerr << "ERROR: ' Ataque' no encontrado en linea de Ataque: '" << line << "'" << endl;
+                            }
+                        } else if (line.find("Recuperacion") != string::npos) {
+                            pos_palabra_clave = line.find(" Recuperacion");
+                            if (pos_palabra_clave != string::npos) {
+                                valor_a_convertir = line.substr(0, pos_palabra_clave);
+                                mejoras_combate_cargadas.recuperacion = stoi(valor_a_convertir);
+                            } else {
+                                cerr << "ERROR: ' Recuperacion' no encontrado en linea de Recuperacion: '" << line << "'" << endl;
+                            }
+                        }
+                        break;
                 }
             }
         }
