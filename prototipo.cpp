@@ -412,22 +412,7 @@ public:
         }
 
         // Liberar los nodos del árbol (y sus habitaciones contenidas) de forma segura
-        // Se usa un enfoque iterativo para evitar desbordamiento de pila con árboles grandes
-        // (Aunque para un árbol ternario pequeño, un recorrido recursivo también podría funcionar)
         if (raiz != nullptr) {
-            // Usamos una "pila" manual para el recorrido post-orden (o similar) para la eliminación.
-            // Para simplificar, asumiremos que nodes_del_arbol_por_id contiene todos los nodos
-            // y los borraremos directamente desde allí después de desconectarlos lógicamente
-            // del árbol si fuera necesario. Sin embargo, un recorrido para asegurar la eliminación
-            // es más robusto. Usaremos un vector temporal como "pila" para la limpieza (NO STL, se emulará con un arreglo dinámico).
-            // O más sencillo, si `nodos_del_arbol_por_id` contiene todos los punteros válidos,
-            // podemos simplemente iterar y borrar.
-
-            // La forma más segura y sin STL para liberar un árbol no binario si no tienes un recorrido explícito de eliminación es:
-            // 1. Desconectar los hijos de cada padre para evitar que los destructores intenten borrar lo mismo.
-            // 2. Luego, borrar cada nodo_del_arbol_por_id.
-            // Para este ejercicio, como los nodos se referencian por ID y son parte del arreglo,
-            // simplemente liberaremos el arreglo de NodoArbol. Los destructores de NodoArbol liberarán las Habitaciones.
 
             // Liberar los nodos y las habitaciones que contienen (ya que el destructor de NodoArbol los libera)
             if (nodos_del_arbol_por_id != nullptr) {
@@ -442,9 +427,7 @@ public:
                 nodos_del_arbol_por_id = nullptr;
             }
         }
-        // El arreglo habitaciones_cargadas_por_id NO necesita ser liberado con delete[]
-        // porque las Habitaciones son eliminadas por los destructores de NodoArbol.
-        // Solo necesitamos liberar el arreglo de punteros, no los objetos a los que apuntan.
+
         if (habitaciones_cargadas_por_id != nullptr) {
             delete[] habitaciones_cargadas_por_id;
             habitaciones_cargadas_por_id = nullptr;
@@ -835,13 +818,13 @@ public:
 // --- Funciones de Lógica de Juego ---
 
 // Función para simular un combate
-void iniciarCombate(Jugador* elara, ColaEnemigos* enemigos_en_combate, ArbolTernario* mi_arbol) {
+void iniciarCombate(Jugador* jugador, ColaEnemigos* enemigos_en_combate, ArbolTernario* mi_arbol, string nombre_protagonista) {
     cout << "\n--- ¡COMBATE INICIADO! ---" << endl;
 
-    while (elara->estaVivo() && !enemigos_en_combate->isEmpty()) {
+    while (jugador->estaVivo() && !enemigos_en_combate->isEmpty()) {
         Enemigo* enemigo_actual = enemigos_en_combate->peek(); // Ver al enemigo del frente
         cout << "\n--------------------------" << endl;
-        cout << "Vida de Elara: " << elara->vida << endl;
+        cout << "Vida de " << nombre_protagonista << ": " << jugador->vida << endl;
         cout << "Te enfrentas a: " << enemigo_actual->nombre << " (Vida: " << enemigo_actual->vida << ")" << endl;
 
         // Turno del jugador
@@ -849,7 +832,7 @@ void iniciarCombate(Jugador* elara, ColaEnemigos* enemigos_en_combate, ArbolTern
         cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpia el buffer antes de cin.get
         cin.get(); // Espera una pulsación de tecla (Enter)
 
-        bool ataque_exitoso = elara->atacar(enemigo_actual);
+        bool ataque_exitoso = jugador->atacar(enemigo_actual);
         if (ataque_exitoso) {
             cout << "¡Has golpeado a " << enemigo_actual->nombre << "!" << endl;
             if (!enemigo_actual->estaVivo()) {
@@ -861,12 +844,12 @@ void iniciarCombate(Jugador* elara, ColaEnemigos* enemigos_en_combate, ArbolTern
             cout << "¡Tu ataque falló!" << endl;
         }
 
-        // Si elara sigue viva y el enemigo actual sigue vivo (o era el último y no hay más)
-        if (elara->estaVivo() && enemigo_actual->estaVivo()) {
+        // Si jugador sigue viva y el enemigo actual sigue vivo (o era el último y no hay más)
+        if (jugador->estaVivo() && enemigo_actual->estaVivo()) {
             // Turno del enemigo
-            bool enemigo_impacta = enemigo_actual->atacar(elara);
+            bool enemigo_impacta = enemigo_actual->atacar(jugador);
             if (enemigo_impacta) {
-                cout << enemigo_actual->nombre << " te ha golpeado! Vida restante: " << elara->vida << endl;
+                cout << enemigo_actual->nombre << " te ha golpeado! Vida restante: " << jugador->vida << endl;
             } else {
                 cout << enemigo_actual->nombre << " falló su ataque!" << endl;
             }
@@ -875,14 +858,14 @@ void iniciarCombate(Jugador* elara, ColaEnemigos* enemigos_en_combate, ArbolTern
 
     cout << "\n--- FIN DE COMBATE ---" << endl;
 
-    if (!elara->estaVivo()) {
-        cout << "Elara ha sido derrotada... ¡GAME OVER!" << endl;
+    if (!jugador->estaVivo()) {
+        cout << nombre_protagonista << " ha sido derrotada... ¡GAME OVER!" << endl;
     } else {
         cout << "¡Has ganado el combate!" << endl;
         // Requisito 7: Recuperación de vida automática post-combate
-        cout << "Elara se recupera " << elara->recuperacion << " puntos de vida." << endl;
-        elara->curarVida(elara->recuperacion);
-        cout << "Vida actual de Elara: " << elara->vida << endl;
+        cout << nombre_protagonista << " se recupera " << jugador->recuperacion << " puntos de vida." << endl;
+        jugador->curarVida(jugador->recuperacion);
+        cout << "Vida actual de " << nombre_protagonista << ": " << jugador->vida << endl;
 
         // Requisito 5: El jugador escoge UNA mejora
         cout << "\n¡Has obtenido mejoras por tu victoria! Escoge UNA para aumentar:" << endl;
@@ -908,27 +891,27 @@ void iniciarCombate(Jugador* elara, ColaEnemigos* enemigos_en_combate, ArbolTern
 
         switch (opcion_mejora) {
             case 1:
-                elara->curarVida(mi_arbol->mejoras_combate_cargadas.vida); // Aumenta vida actual
-                cout << "¡Vida de Elara aumentada! Vida actual: " << elara->vida << endl;
+                jugador->curarVida(mi_arbol->mejoras_combate_cargadas.vida); // Aumenta vida actual
+                cout << "¡Vida de " << nombre_protagonista << " aumentada! Vida actual: " << jugador->vida << endl;
                 break;
             case 2:
-                elara->aumentarAtaque(mi_arbol->mejoras_combate_cargadas.ataque);
-                cout << "¡Ataque de Elara aumentado! Ataque actual: " << elara->ataque << endl;
+                jugador->aumentarAtaque(mi_arbol->mejoras_combate_cargadas.ataque);
+                cout << "¡Ataque de " << nombre_protagonista << " aumentado! Ataque actual: " << jugador->ataque << endl;
                 break;
             case 3:
-                elara->aumentarPrecision(mi_arbol->mejoras_combate_cargadas.precision);
-                cout << "¡Precision de Elara aumentada! Precision actual: " << elara->precision << endl;
+                jugador->aumentarPrecision(mi_arbol->mejoras_combate_cargadas.precision);
+                cout << "¡Precision de " << nombre_protagonista << " aumentada! Precision actual: " << jugador->precision << endl;
                 break;
             case 4:
-                elara->aumentarRecuperacion(mi_arbol->mejoras_combate_cargadas.recuperacion);
-                cout << "¡Recuperacion de Elara aumentada! Recuperacion actual: " << elara->recuperacion << endl;
+                jugador->aumentarRecuperacion(mi_arbol->mejoras_combate_cargadas.recuperacion);
+                cout << "¡Recuperacion de " << nombre_protagonista << " aumentada! Recuperacion actual: " << jugador->recuperacion << endl;
                 break;
         }
     }
 }
 
 // Función para resolver un evento
-void resolverEvento(Jugador* elara, EventoPrincipal* evento, NodoArbol*& current_node, NodoArbol* previous_node) {
+void resolverEvento(Jugador* jugador, EventoPrincipal* evento, NodoArbol*& current_node, NodoArbol* previous_node, string nombre_protagonista) {
     cout << "\n--- EVENTO: " << evento->nombre << " ---" << endl;
     cout << evento->descripcion_general << endl;
 
@@ -963,28 +946,28 @@ void resolverEvento(Jugador* elara, EventoPrincipal* evento, NodoArbol*& current
 
     // Aplicar consecuencias
     if (opcion_elegida->consec_danio > 0) {
-        elara->recibirDanio(opcion_elegida->consec_danio);
-        cout << "Elara recibe " << opcion_elegida->consec_danio << " de daño. Vida actual: " << elara->vida << endl;
+        jugador->recibirDanio(opcion_elegida->consec_danio);
+        cout << nombre_protagonista << " recibe " << opcion_elegida->consec_danio << " de daño. Vida actual: " << jugador->vida << endl;
     }
     if (opcion_elegida->consec_cura > 0) {
-        elara->curarVida(opcion_elegida->consec_cura);
-        cout << "Elara se cura " << opcion_elegida->consec_cura << " puntos de vida. Vida actual: " << elara->vida << endl;
+        jugador->curarVida(opcion_elegida->consec_cura);
+        cout << nombre_protagonista << " se cura " << opcion_elegida->consec_cura << " puntos de vida. Vida actual: " << jugador->vida << endl;
     }
     if (opcion_elegida->consec_mejora_vida > 0) {
-        elara->curarVida(opcion_elegida->consec_mejora_vida); // Aumenta vida actual
-        cout << "La vida de Elara ha sido mejorada. Vida actual: " << elara->vida << endl;
+        jugador->curarVida(opcion_elegida->consec_mejora_vida); // Aumenta vida actual
+        cout << "La vida de " << nombre_protagonista << " ha sido mejorada. Vida actual: " << jugador->vida << endl;
     }
     if (opcion_elegida->consec_mejora_ataque > 0) {
-        elara->aumentarAtaque(opcion_elegida->consec_mejora_ataque);
-        cout << "El ataque de Elara ha sido mejorado. Ataque actual: " << elara->ataque << endl;
+        jugador->aumentarAtaque(opcion_elegida->consec_mejora_ataque);
+        cout << "El ataque de " << nombre_protagonista << " ha sido mejorado. Ataque actual: " << jugador->ataque << endl;
     }
     if (opcion_elegida->consec_mejora_precision > 0.0) {
-        elara->aumentarPrecision(opcion_elegida->consec_mejora_precision);
-        cout << "La precision de Elara ha sido mejorada. Precision actual: " << elara->precision << endl;
+        jugador->aumentarPrecision(opcion_elegida->consec_mejora_precision);
+        cout << "La precision de " << nombre_protagonista << " ha sido mejorada. Precision actual: " << jugador->precision << endl;
     }
     if (opcion_elegida->consec_mejora_recuperacion > 0) {
-        elara->aumentarRecuperacion(opcion_elegida->consec_mejora_recuperacion);
-        cout << "La recuperacion de Elara ha sido mejorada. Recuperacion actual: " << elara->recuperacion << endl;
+        jugador->aumentarRecuperacion(opcion_elegida->consec_mejora_recuperacion);
+        cout << "La recuperacion de " << nombre_protagonista << " ha sido mejorada. Recuperacion actual: " << jugador->recuperacion << endl;
     }
     if (opcion_elegida->consec_volver_anterior) {
         if (previous_node != nullptr) {
@@ -998,9 +981,9 @@ void resolverEvento(Jugador* elara, EventoPrincipal* evento, NodoArbol*& current
     // Requisito 7: Recuperación de vida automática post-evento (si no hubo cura/daño directo en el evento)
     // Se aplica solo si el evento no tuvo una consecuencia directa de vida (curar/dañar)
     if (opcion_elegida->consec_cura == 0 && opcion_elegida->consec_danio == 0) {
-        cout << "Elara se recupera " << elara->recuperacion << " puntos de vida." << endl;
-        elara->curarVida(elara->recuperacion);
-        cout << "Vida actual de Elara: " << elara->vida << endl;
+        cout << nombre_protagonista << " se recupera " << jugador->recuperacion << " puntos de vida." << endl;
+        jugador->curarVida(jugador->recuperacion);
+        cout << "Vida actual de " << nombre_protagonista << ": " << jugador->vida << endl;
     }
 
     cout << "Presiona ENTER para continuar..." << endl;
@@ -1008,13 +991,13 @@ void resolverEvento(Jugador* elara, EventoPrincipal* evento, NodoArbol*& current
 }
 
 
-int main() {
-    // Inicializar jugador Elara
-    Jugador elara(100, 10, 0.7, 5); // Vida, Ataque, Precision, Recuperacion
+int juego(string archivo) {
+    // Inicializar jugador
+    Jugador jugador(100, 10, 0.7, 5); // Vida, Ataque, Precision, Recuperacion
 
     // Crear y cargar el mapa del juego
     ArbolTernario mi_arbol;
-    if (!mi_arbol.cargarMapa("ejemplo.map")) {
+    if (!mi_arbol.cargarMapa(archivo)) {
         cout << "Fallo al cargar el mapa. Saliendo del juego." << endl;
         return 1;
     }
@@ -1025,12 +1008,17 @@ int main() {
 
     cout << "¡Bienvenido a la Aventura de Estructuras de Datos!" << endl;
 
-    while (elara.estaVivo() && current_node != nullptr) {
+    string nombre_protagonista;
+    cout << "\n" << "Escoge tu nombre: " << endl;
+    getline(cin, nombre_protagonista);
+
+
+    while (jugador.estaVivo() && current_node != nullptr) {
         cout << "\n----------------------------------------" << endl;
         cout << "Estas en: " << current_node->habitacion->nombre << " (ID: " << current_node->habitacion->id << ")" << endl;
         cout << "Descripcion: " << current_node->habitacion->descripcion_habitacion << endl;
-        cout << "Vida de Elara: " << elara.vida << " | Ataque: " << elara.ataque 
-             << " | Precision: " << elara.precision << " | Recuperacion: " << elara.recuperacion << endl;
+        cout << "Vida de " << nombre_protagonista << ": " << jugador.vida << " | Ataque: " << jugador.ataque 
+             << " | Precision: " << jugador.precision << " | Recuperacion: " << jugador.recuperacion << endl;
         cout << "----------------------------------------" << endl;
 
         switch (current_node->habitacion->tipo_habitacion) {
@@ -1041,7 +1029,7 @@ int main() {
             case HabEvento: {
                 EventoPrincipal* evento_elegido = mi_arbol.generarEventoAleatorio();
                 if (evento_elegido != nullptr) {
-                    resolverEvento(&elara, evento_elegido, current_node, previous_node);
+                    resolverEvento(&jugador, evento_elegido, current_node, previous_node, nombre_protagonista);
                     // previous_node podría haber cambiado si el evento era el de "volver atrás"
                 } else {
                     cout << "Error: No se pudo generar un evento aleatorio." << endl;
@@ -1065,10 +1053,10 @@ int main() {
                     }
                 }
                 
-                iniciarCombate(&elara, &cola_combate, &mi_arbol); // Pasar el arbol para las mejoras
+                iniciarCombate(&jugador, &cola_combate, &mi_arbol, nombre_protagonista); // Pasar el arbol para las mejoras
                 
-                if (!elara.estaVivo()) {
-                    break; // Salir del bucle principal si Elara muere
+                if (!jugador.estaVivo()) {
+                    break; // Salir del bucle principal si jugador muere
                 }
                 break;
             }
@@ -1084,20 +1072,20 @@ int main() {
                         continue; // Vuelve al inicio del bucle para procesar el nodo anterior
                     } else {
                         cout << "Pero no hay un lugar anterior al que volver. Fin del juego." << endl;
-                        elara.recibirDanio(elara.vida); // Simula el fin del juego
+                        jugador.recibirDanio(jugador.vida); // Simula el fin del juego
                     }
                 } else {
-                    elara.recibirDanio(elara.vida); // Simula el fin del juego para otros finales
+                    jugador.recibirDanio(jugador.vida); // Simula el fin del juego para otros finales
                 }
                 break;
             case HabErroneo:
                 cout << "Error: Tipo de habitacion desconocido. Saliendo del juego." << endl;
-                elara.recibirDanio(elara.vida); // Terminar el juego
+                jugador.recibirDanio(jugador.vida); // Terminar el juego
                 break;
         }
 
-        if (!elara.estaVivo()) {
-            cout << "\nLa aventura de Elara ha terminado." << endl;
+        if (!jugador.estaVivo()) {
+            cout << "\nLa aventura de " << nombre_protagonista << " ha terminado." << endl;
             break; // Game Over
         }
 
@@ -1112,7 +1100,6 @@ int main() {
         if (current_node->hijo_der != nullptr) {
             cout << "3. " << current_node->hijo_der->habitacion->nombre << endl;
         }
-        cout << "0. Salir del juego" << endl;
 
         int eleccion_camino;
         bool camino_valido = false;
@@ -1123,8 +1110,6 @@ int main() {
                 cout << "Entrada invalida. Intenta de nuevo." << endl;
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            } else if (eleccion_camino == 0) {
-                camino_valido = true; // Salir
             } else if (eleccion_camino == 1 && current_node->hijo_izq != nullptr) {
                 camino_valido = true;
             } else if (eleccion_camino == 2 && current_node->hijo_cen != nullptr) {
@@ -1137,27 +1122,29 @@ int main() {
         }
         cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpiar buffer
 
-        if (eleccion_camino == 0) {
-            cout << "Elara decide terminar su aventura. ¡Hasta pronto!" << endl;
-            break; // Salir del juego
-        } else {
-            previous_node = current_node; // Guardar el nodo actual antes de moverse
-            if (eleccion_camino == 1) {
-                current_node = current_node->hijo_izq;
-            } else if (eleccion_camino == 2) {
-                current_node = current_node->hijo_cen;
-            } else if (eleccion_camino == 3) {
-                current_node = current_node->hijo_der;
-            }
+
+        
+        previous_node = current_node; // Guardar el nodo actual antes de moverse
+        if (eleccion_camino == 1) {
+            current_node = current_node->hijo_izq;
+        } else if (eleccion_camino == 2) {
+            current_node = current_node->hijo_cen;
+        } else if (eleccion_camino == 3) {
+            current_node = current_node->hijo_der;
         }
     }
 
-    if (!elara.estaVivo()) {
-        cout << "\n¡La aventura ha terminado! Elara no ha sobrevivido." << endl;
+    if (!jugador.estaVivo()) {
+        cout << "\n¡La aventura ha terminado! " << nombre_protagonista << " no ha sobrevivido." << endl;
     } else {
         cout << "\n¡Gracias por jugar!" << endl;
     }
 
     // El destructor de mi_arbol se encargará de liberar toda la memoria dinámica.
     return 0;
+}
+
+int main() {
+    string mapa = "ejemplo.map";
+    juego(mapa);
 }
