@@ -843,7 +843,6 @@ void iniciarCombate(Jugador* jugador, ColaEnemigos* enemigos_en_combate, ArbolTe
 
         // Turno del jugador
         cout << "Presiona ENTER para atacar!" << endl;
-        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpia el buffer antes de cin.get
         cin.get(); // Espera una pulsación de tecla (Enter)
 
         bool ataque_exitoso = jugador->atacar(enemigo_actual);
