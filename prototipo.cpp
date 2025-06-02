@@ -1004,7 +1004,7 @@ void resolverEvento(Jugador* jugador, EventoPrincipal* evento, NodoArbol*& curre
 }
 
 
-int juego(string archivo) {
+void juego(string archivo) {
     // Inicializar jugador
     Jugador jugador(100, 10, 0.7, 5); // Vida, Ataque, Precision, Recuperacion
 
@@ -1012,7 +1012,7 @@ int juego(string archivo) {
     ArbolTernario mi_arbol;
     if (!mi_arbol.cargarMapa(archivo)) {
         cout << "Fallo al cargar el mapa. Saliendo del juego." << endl;
-        return 1;
+        return;
     }
 
     // Inicializar la posición actual del jugador
@@ -1152,7 +1152,6 @@ int juego(string archivo) {
     }
 
     // El destructor de mi_arbol se encargará de liberar toda la memoria dinámica.
-    return 0;
 }
 
 int main() {

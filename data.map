@@ -1,9 +1,108 @@
 INICIO DEL ARCHIVO
 HABITACIONES
 
+0 Apartamento de FEDRA (INICIO)
+La penumbra se cierne sobre tu pequeño apartamento dentro de la zona de cuarentena de FEDRA. El aire es pesado con el silencio roto solo por la respiración irregular de tu madre en la habitación contigua. Atada a la cama, su cuerpo convulsiona ocasionalmente, las grotescas formaciones fúngicas comenzando a brotar de su piel. El miedo y la desesperación te corroen. Tienes tu cuchillo en la mano, la única forma de acabar con su sufrimiento... o la única forma de protegerla mientras buscas una imposible esperanza.
+1 Buscar una cura (COMBATE)
+Tomas tu cuchillo, el corazón latiéndote a mil. Sales sigilosamente de la habitación, decidido a encontrar una cura a toda costa. Justo al abrir la puerta del apartamento, te encuentras de frente con un militar de FEDRA, patrullando el pasillo. Te ha visto. Sin dudarlo, te abalanzas sobre él con tu cuchillo antes de que pueda reaccionar, lo apuñalas y lo matas. Robas su fusil y sus provisiones. Has logrado escabullirte por un túnel de servicio abandonado, una vía de escape olvidada de la zona de cuarentena. El aire es húmedo y denso, y el eco de tus pasos resuena en la oscuridad.
+2 Liberar a tu madre (FIN)
+Te acercas a la cama, el cuchillo temblándole en la mano. Cuando te inclinas para acabar con su miseria, tu madre, con una fuerza repentina y antinatural, se abalanza sobre ti, el hongo en su boca extendiéndose. Sientes un mordisco agonizante antes de que tu vista se nuble. En ese momento, la puerta del apartamento se abre de golpe. Un militar de FEDRA entra, lo ves todo borroso, su rostro de horror, y luego la oscuridad. Él te ha visto infectada y no duda un segundo.
+3 Callejón Trasero (COMBATE)
+Un callejón oscuro y estrecho, lleno de basura y ratas. El hedor de la muerte es inconfundible. Las sombras son densas y los susurros fúngicos te advierten de la presencia cercana de infectados.
+4 Almacén Abandonado (EVENTO)
+Un viejo almacén empolvado, con estantes vacíos y maquinaria oxidada. La luz se filtra a través de los agujeros en el techo, creando haces de luz que bailan en el aire. Parece seguro por ahora, un lugar donde quizás se encuentren suministros o información.
+5 Edificio Residencial Derrumbado (EVENTO)
+Entras a lo que fue un edificio de apartamentos, ahora un laberinto de escombros. Los juguetes rotos y las fotos familiares descoloridas son un recordatorio de las vidas que se perdieron. Podría haber algo útil entre los restos.
+6 Autopista Abandonada (COMBATE)
+La autopista está desmoronándose, con coches abandonados y vegetación reclamando el asfalto. Es un lugar expuesto, pero ofrece una ruta rápida, si puedes sobrevivir a los peligros. El viento silba, llevando consigo los lamentos distantes de los infectados.
+7 Refugio Subterráneo (COMBATE)
+Un laberinto de túneles oscuros y húmedos. El eco de los chasquidos de los Clickers resuena, amplificado en la oscuridad. El peligro es constante, pero esta ruta subterránea podría ser la más segura para evitar los peligros de la superficie.
+8 Seguir Buscando (FINAL)
+Caes en una trampa brutal tendida por saqueadores. No son infectados, sino humanos tan rotos y salvajes como las bestias. Te desnudan de tus pertenencias y te dejan herida, sola, y sin posibilidad de continuar.
+9 Museo de historia natural (EVENTO)
+Un museo majestuoso, ahora un eco de un pasado que ya no existe. Las exhibiciones están destrozadas, pero la estructura sigue en pie. Podría haber archivos o pistas sobre los esfuerzos de la humanidad para detener la pandemia en sus inicios.
+10 Galerías Subterráneas (EVENTO)
+Una serie de antiguas galerías subterráneas, posiblemente minas o túneles de contrabando. El aire es denso y el camino, traicionero. Podría haber reliquias de un mundo pasado, o quizás, una forma de evitar los peligros de la superficie.
+11 Base Militar (FINAL)
+
+12 Bosque (COMBATE)
+Abanzas por un bosque. Los árboles frondosos reducen la visibilidad, y los peligros pueden aparecer de la nada entre la naturaleza.
+13 Puesto de Control abandonado (EVENTO)
+Un puesto de control de FEDRA abandonado. Vehículos militares destrozados y barricadas. La milicia se ha ido, pero quizás dejaron algo valioso, o una trampa.
+14 Entrada al Metro Profundo (COMBATE)
+La entrada a una estación de metro inusualmente profunda. El aire aquí es denso, casi irrespirable, con una humedad extraña. Es un lugar donde el Cordyceps prospera. El riesgo es máximo, pero las leyendas dicen que los viejos túneles llevan a lugares olvidados.
+15 
+
+16 
+
+17 
+
+18 
+
+19 Santuario lejano (FINAL)
+Encuentras una pequeña comunidad aislada, oculta en un valle. Han logrado sobrevivir, pero su existencia es una negación. Han renunciado a la búsqueda de una cura, viviendo día a día sin mirar al futuro. Te ofrecen refugio, un lugar seguro donde podrías descansar, pero al verlos, entiendes que la cura que buscabas no está aquí, ni nunca la buscarán. Tu madre sigue atada al Cordyceps, y tú te quedas, una superviviente más, con el peso de su memoria, sabiendo que tu viaje no pudo traerle la paz.
+20 
+
+21 Cabaña del Cazador a lo lejos (EVENTO)
+Una pequeña cabaña aislada en las profundidades del bosque. Parece haber sido habitada recientemente. Quizás el cazador dejó algo útil, o es una trampa. Cada pista para tu madre es vital.
+22 
+
+23 
+
+24 
+
+25 
+
+26 
+Después de un viaje agotador, encuentras un lugar que, según los rumores, albergaba la cura. Pero solo hay escombros, equipos destrozados y las últimas notas de científicos desesperados: 'Infección demasiado avanzada. No hay esperanza para los ya convertidos.' La verdad golpea tu alma. No hay cura para la muerte. No hay cura para lo que le pasó a tu madre. Mueres de tristeza y desilusión, la imagen de su rostro inerte grabada en tu mente.
+27 
+
+28 Hospital a lo lejos (FINAL)
+Logras llegar a una zona de cuarentena, supuestamente segura, pero el lugar es un infierno viviente. Superpoblado, sin recursos, y la enfermedad, a pesar de las barreras, se propaga silenciosamente, consumiendo a los pocos que quedan. Aquí no hay cura, solo contención y una muerte lenta para todos. Ves la desesperación en los ojos de los demás, un reflejo de lo que esperaría a tu madre si aún 'viviera'. Te enfermas, te debilitas. Mueres lentamente de agotamiento y desesperanza, el rostro infectado de tu madre persiguiéndote hasta el final.
+29 
+
+30 Laboratorio a lo lejos (FINAL)
+En un lugar que parecía imposible, encuentras un laboratorio secreto, aún operativo, donde un grupo de científicos aislados ha logrado un avance significativo en la erradicación del Cordyceps. Vuelves con tu madre y le inyectas la cura, pero ya es muy tarde, el Cordyceps ya había matado a tu madre, solo ves como la inyección abandona el cuerpo de tu ya muerta madre. La cura existe, pero no para quien ya se fue.
+31 
+
+32 
+
+33 
 
 CONEXIONES
-
+0 -> 1
+0 -> 2
+1 -> 3
+1 -> 4
+3 -> 5
+3 -> 6
+4 -> 7
+4 -> 8
+5 -> 9
+5 -> 10
+6 -> 11
+6 -> 12
+7 -> 13
+7 -> 14
+9 -> 15
+9 -> 16
+10 -> 17
+10 -> 18
+12 -> 19
+12 -> 20
+12 -> 21
+13 -> 22
+13 -> 23
+14 -> 24
+14 -> 25
+16 -> 26
+16 -> 27
+18 -> 28
+18 -> 29
+20 -> 30
+20 -> 31
+21 -> 32
+21 -> 33
 
 ENEMIGOS
 4
@@ -14,8 +113,9 @@ Mercenario | Vida 15 | Ataque 5 | presicion 0.9 | Probabilidad 0.5
 
 EVENTOS
 
-
 MEJORAS DE COMBATE
-
-
++5 Vida
++0.1 Precision
++1 Ataque
++1 Recuperacion
 FIN DEL ARCHIVO
