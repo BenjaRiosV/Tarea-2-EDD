@@ -685,17 +685,6 @@ public:
                     break;
                 }
                 case 4: { // EVENTOS
-                    // Formato de evento:
-                    // & (ya se consumió antes de entrar al switch si es el primer evento)
-                    // Nombre
-                    // Probabilidad X
-                    // Descripcion
-                    // A: Enunciado A
-                    // Descripcion A
-                    // Consecuencia A
-                    // B: Enunciado B
-                    // Descripcion B
-                    // Consecuencia B
 
                     static int evento_idx = 0;
                     if (evento_idx >= num_eventos_principales_cargados) continue; // Si ya se cargaron todos los eventos
@@ -819,7 +808,7 @@ public:
 
 // Función para simular un combate
 void iniciarCombate(Jugador* jugador, ColaEnemigos* enemigos_en_combate, ArbolTernario* mi_arbol, string nombre_protagonista) {
-    cout << "\n--- ¡COMBATE INICIADO! ---" << endl;
+    cout << "\n--- COMBATE INICIADO! ---" << endl;
 
     while (jugador->estaVivo() && !enemigos_en_combate->isEmpty()) {
         Enemigo* enemigo_actual = enemigos_en_combate->peek(); // Ver al enemigo del frente
@@ -834,14 +823,14 @@ void iniciarCombate(Jugador* jugador, ColaEnemigos* enemigos_en_combate, ArbolTe
 
         bool ataque_exitoso = jugador->atacar(enemigo_actual);
         if (ataque_exitoso) {
-            cout << "¡Has golpeado a " << enemigo_actual->nombre << "!" << endl;
+            cout << "Has golpeado a " << enemigo_actual->nombre << "!" << endl;
             if (!enemigo_actual->estaVivo()) {
                 cout << enemigo_actual->nombre << " ha sido derrotado!" << endl;
                 enemigos_en_combate->dequeue(); // Sacar al enemigo derrotado de la cola
                 // El destructor de NodoColaEnemigos se encarga de 'delete enemigo_actual;'
             }
         } else {
-            cout << "¡Tu ataque falló!" << endl;
+            cout << "Tu ataque falló!" << endl;
         }
 
         // Si jugador sigue viva y el enemigo actual sigue vivo (o era el último y no hay más)
@@ -859,25 +848,25 @@ void iniciarCombate(Jugador* jugador, ColaEnemigos* enemigos_en_combate, ArbolTe
     cout << "\n--- FIN DE COMBATE ---" << endl;
 
     if (!jugador->estaVivo()) {
-        cout << nombre_protagonista << " ha sido derrotada... ¡GAME OVER!" << endl;
+        cout << nombre_protagonista << " ha sido derrotada... GAME OVER!" << endl;
     } else {
-        cout << "¡Has ganado el combate!" << endl;
+        cout << "Has ganado el combate!" << endl;
         // Requisito 7: Recuperación de vida automática post-combate
         cout << nombre_protagonista << " se recupera " << jugador->recuperacion << " puntos de vida." << endl;
         jugador->curarVida(jugador->recuperacion);
         cout << "Vida actual de " << nombre_protagonista << ": " << jugador->vida << endl;
 
         // Requisito 5: El jugador escoge UNA mejora
-        cout << "\n¡Has obtenido mejoras por tu victoria! Escoge UNA para aumentar:" << endl;
+        cout << "\nHas obtenido mejoras por tu victoria! Escoge UNA para aumentar:" << endl;
         cout << "1. Vida (+" << mi_arbol->mejoras_combate_cargadas.vida << ")" << endl;
         cout << "2. Ataque (+" << mi_arbol->mejoras_combate_cargadas.ataque << ")" << endl;
-        cout << "3. Precision (+" << mi_arbol->mejoras_combate_cargadas.precision << ")" << endl;
-        cout << "4. Recuperacion (+" << mi_arbol->mejoras_combate_cargadas.recuperacion << ")" << endl;
+        cout << "3. Precisión (+" << mi_arbol->mejoras_combate_cargadas.precision << ")" << endl;
+        cout << "4. Recuperación (+" << mi_arbol->mejoras_combate_cargadas.recuperacion << ")" << endl;
         
         int opcion_mejora;
         bool opcion_valida = false;
         while (!opcion_valida) {
-            cout << "Elige una opcion (1-4): ";
+            cout << "Elige una opción (1-4): ";
             cin >> opcion_mejora;
             if (cin.fail() || opcion_mejora < 1 || opcion_mejora > 4) {
                 cout << "Opcion invalida. Intenta de nuevo." << endl;
@@ -892,19 +881,19 @@ void iniciarCombate(Jugador* jugador, ColaEnemigos* enemigos_en_combate, ArbolTe
         switch (opcion_mejora) {
             case 1:
                 jugador->curarVida(mi_arbol->mejoras_combate_cargadas.vida); // Aumenta vida actual
-                cout << "¡Vida de " << nombre_protagonista << " aumentada! Vida actual: " << jugador->vida << endl;
+                cout << "Vida de " << nombre_protagonista << " aumentada! Vida actual: " << jugador->vida << endl;
                 break;
             case 2:
                 jugador->aumentarAtaque(mi_arbol->mejoras_combate_cargadas.ataque);
-                cout << "¡Ataque de " << nombre_protagonista << " aumentado! Ataque actual: " << jugador->ataque << endl;
+                cout << "Ataque de " << nombre_protagonista << " aumentado! Ataque actual: " << jugador->ataque << endl;
                 break;
             case 3:
                 jugador->aumentarPrecision(mi_arbol->mejoras_combate_cargadas.precision);
-                cout << "¡Precision de " << nombre_protagonista << " aumentada! Precision actual: " << jugador->precision << endl;
+                cout << "Precisión de " << nombre_protagonista << " aumentada! Precisión actual: " << jugador->precision << endl;
                 break;
             case 4:
                 jugador->aumentarRecuperacion(mi_arbol->mejoras_combate_cargadas.recuperacion);
-                cout << "¡Recuperacion de " << nombre_protagonista << " aumentada! Recuperacion actual: " << jugador->recuperacion << endl;
+                cout << "Recuperación de " << nombre_protagonista << " aumentada! Recuperación actual: " << jugador->recuperacion << endl;
                 break;
         }
     }
@@ -922,11 +911,11 @@ void resolverEvento(Jugador* jugador, EventoPrincipal* evento, NodoArbol*& curre
     char eleccion;
     bool opcion_valida = false;
     while (!opcion_valida) {
-        cout << "Elige una opcion (A/B): ";
+        cout << "Elige una opción (A/B): ";
         cin >> eleccion;
         eleccion = (char)toupper(eleccion); // Convertir a mayúscula
         if (cin.fail() || (eleccion != 'A' && eleccion != 'B')) {
-            cout << "Opcion invalida. Intenta de nuevo." << endl;
+            cout << "Opción invalida. Intenta de nuevo." << endl;
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
         } else {
@@ -955,7 +944,7 @@ void resolverEvento(Jugador* jugador, EventoPrincipal* evento, NodoArbol*& curre
     }
     if (opcion_elegida->consec_mejora_vida > 0) {
         jugador->curarVida(opcion_elegida->consec_mejora_vida); // Aumenta vida actual
-        cout << "La vida de " << nombre_protagonista << " ha sido mejorada. Vida actual: " << jugador->vida << endl;
+        cout << "La vida de " << nombre_protagonista << " ha sido incrementada. Vida actual: " << jugador->vida << endl;
     }
     if (opcion_elegida->consec_mejora_ataque > 0) {
         jugador->aumentarAtaque(opcion_elegida->consec_mejora_ataque);
@@ -963,18 +952,18 @@ void resolverEvento(Jugador* jugador, EventoPrincipal* evento, NodoArbol*& curre
     }
     if (opcion_elegida->consec_mejora_precision > 0.0) {
         jugador->aumentarPrecision(opcion_elegida->consec_mejora_precision);
-        cout << "La precision de " << nombre_protagonista << " ha sido mejorada. Precision actual: " << jugador->precision << endl;
+        cout << "La precision de " << nombre_protagonista << " ha sido mejorada. Precisión actual: " << jugador->precision << endl;
     }
     if (opcion_elegida->consec_mejora_recuperacion > 0) {
         jugador->aumentarRecuperacion(opcion_elegida->consec_mejora_recuperacion);
-        cout << "La recuperacion de " << nombre_protagonista << " ha sido mejorada. Recuperacion actual: " << jugador->recuperacion << endl;
+        cout << "La recuperación de " << nombre_protagonista << " ha sido mejorada. Recuperación actual: " << jugador->recuperacion << endl;
     }
     if (opcion_elegida->consec_volver_anterior) {
         if (previous_node != nullptr) {
             current_node = previous_node; // Regresa al nodo ante-anterior
-            cout << "Has vuelto a la habitacion anterior!" << endl;
+            cout << "Has vuelto a la habitación anterior!" << endl;
         } else {
-            cout << "No hay una habitacion anterior a la que volver." << endl;
+            cout << "No hay una habitación anterior a la que volver." << endl;
         }
     }
     
@@ -1004,21 +993,19 @@ int juego(string archivo) {
 
     // Inicializar la posición actual del jugador
     NodoArbol* current_node = mi_arbol.raiz;
-    NodoArbol* previous_node = nullptr; // Para el requisito de volver al nodo anterior (Playa)
+    NodoArbol* previous_node = nullptr; // Para el requisito de volver al nodo anterior
 
-    cout << "¡Bienvenido a la Aventura de Estructuras de Datos!" << endl;
+    cout << "Bienvenido a la Aventura de Estructuras de Datos!" << endl;
 
     string nombre_protagonista;
-    cout << "\n" << "Escoge tu nombre: " << endl;
-    getline(cin, nombre_protagonista);
-
+    cout << "\n" << "Escoge tu nombre: "; getline(cin, nombre_protagonista);
 
     while (jugador.estaVivo() && current_node != nullptr) {
         cout << "\n----------------------------------------" << endl;
-        cout << "Estas en: " << current_node->habitacion->nombre << " (ID: " << current_node->habitacion->id << ")" << endl;
-        cout << "Descripcion: " << current_node->habitacion->descripcion_habitacion << endl;
+        cout << "Estás en: " << current_node->habitacion->nombre << endl;
+        cout << "Descripción: " << current_node->habitacion->descripcion_habitacion << endl;
         cout << "Vida de " << nombre_protagonista << ": " << jugador.vida << " | Ataque: " << jugador.ataque 
-             << " | Precision: " << jugador.precision << " | Recuperacion: " << jugador.recuperacion << endl;
+             << " | Precisión: " << jugador.precision << " | Recuperación: " << jugador.recuperacion << endl;
         cout << "----------------------------------------" << endl;
 
         switch (current_node->habitacion->tipo_habitacion) {
@@ -1041,7 +1028,7 @@ int juego(string archivo) {
                 // Generar 1 a 3 enemigos aleatorios para el combate
                 uniform_int_distribution<> num_enemigos_dis(1, 3);
                 int cantidad_enemigos = num_enemigos_dis(gen);
-                cout << "¡Te enfrentas a " << cantidad_enemigos << " enemigos!" << endl;
+                cout << "Te enfrentas a " << cantidad_enemigos << " enemigos!" << endl;
 
                 for (int i = 0; i < cantidad_enemigos; ++i) {
                     Enemigo* nuevo_enemigo = mi_arbol.generarEnemigoAleatorio();
@@ -1061,12 +1048,12 @@ int juego(string archivo) {
                 break;
             }
             case HabFin:
-                cout << "¡Has llegado a un final!" << endl;
+                cout << "Has llegado a un final!" << endl;
                 // Manejar requisito especial 3: Playa (ID 9)
                 if (current_node->habitacion->id == 9) {
                     if (previous_node != nullptr) {
                         current_node = previous_node; // Vuelve al nodo anterior
-                        cout << "El tiempo se distorsiona... ¡Vuelves a la habitacion anterior!" << endl;
+                        cout << "El tiempo se distorsiona... Vuelves a la habitacion anterior!" << endl;
                         cout << "Presiona ENTER para continuar..." << endl;
                         cin.get();
                         continue; // Vuelve al inicio del bucle para procesar el nodo anterior
@@ -1079,7 +1066,7 @@ int juego(string archivo) {
                 }
                 break;
             case HabErroneo:
-                cout << "Error: Tipo de habitacion desconocido. Saliendo del juego." << endl;
+                cout << "Error: Tipo de habitación desconocido. Saliendo del juego." << endl;
                 jugador.recibirDanio(jugador.vida); // Terminar el juego
                 break;
         }
@@ -1090,7 +1077,7 @@ int juego(string archivo) {
         }
 
         // Mostrar opciones de movimiento
-        cout << "\n¿A donde quieres ir?" << endl;
+        cout << "\nA donde quieres ir?" << endl;
         if (current_node->hijo_izq != nullptr) {
             cout << "1. " << current_node->hijo_izq->habitacion->nombre << endl;
         }
@@ -1117,7 +1104,7 @@ int juego(string archivo) {
             } else if (eleccion_camino == 3 && current_node->hijo_der != nullptr) {
                 camino_valido = true;
             } else {
-                cout << "Opcion de camino invalida o no existe. Intenta de nuevo." << endl;
+                cout << "Opción de camino invalida o no existe. Intenta de nuevo." << endl;
             }
         }
         cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpiar buffer
@@ -1135,9 +1122,9 @@ int juego(string archivo) {
     }
 
     if (!jugador.estaVivo()) {
-        cout << "\n¡La aventura ha terminado! " << nombre_protagonista << " no ha sobrevivido." << endl;
+        cout << "\nLa aventura ha terminado! " << nombre_protagonista << " no ha sobrevivido." << endl;
     } else {
-        cout << "\n¡Gracias por jugar!" << endl;
+        cout << "\nGracias por jugar!" << endl;
     }
 
     // El destructor de mi_arbol se encargará de liberar toda la memoria dinámica.
