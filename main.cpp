@@ -186,6 +186,25 @@ public:
         tamano++;
     }
 
+     void listarEnemigos() {
+        if (isEmpty()) {
+            cout << "No hay enemigos en la cola." << endl;
+            return;
+        }
+        NodoColaEnemigos* actual = frente;
+        int count = 0;
+        while (actual != nullptr) {
+            if (count > 0) {
+                cout << " y ";
+            }
+            cout << actual->enemigo->nombre;
+            actual = actual->siguiente;
+            count++;
+        }
+        cout << "!" << endl;
+    }
+
+
     // Método para sacar un enemigo del frente de la cola y devolverlo.
     // Retorna nullptr si la cola está vacía.
     Enemigo* dequeue() {
@@ -821,6 +840,9 @@ public:
 
 // Función para simular un combate
 void iniciarCombate(Jugador* jugador, ColaEnemigos* enemigos_en_combate, ArbolTernario* mi_arbol, string nombre_protagonista) {
+
+    cout << "\n----------------------------------------" << endl;
+    cout << "Te enfrentas a ", enemigos_en_combate->listarEnemigos(); 
     cout << "\n--- COMBATE INICIADO! ---" << endl;
 
     while (jugador->estaVivo() && !enemigos_en_combate->isEmpty()) {
