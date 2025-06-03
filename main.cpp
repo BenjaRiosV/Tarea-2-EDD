@@ -1070,10 +1070,14 @@ void juego(string archivo) {
     cout << "Escoge tu nombre: "; getline(cin, nombre_protagonista);
 
     while (jugador.estaVivo() && current_node != nullptr) {
+        bool flag; // Para saber si estamos en una habitación final.
+        if (current_node->habitacion->tipo_habitacion == HabFin) {
+            bool flag = false;
+        }
         cout << "\n-------------------------------------------" << endl;
         cout << "--- " << current_node->habitacion->nombre << " ---" << endl;
         cout << current_node->habitacion->descripcion_habitacion << endl;
-        if (!HabFin) cout << "Vida de " << nombre_protagonista << ": " << jugador.vida << " | Ataque: " << jugador.ataque << " | Precisión: " << jugador.precision << " | Recuperación: " << jugador.recuperacion << endl;
+        if (flag) cout << "Vida de " << nombre_protagonista << ": " << jugador.vida << " | Ataque: " << jugador.ataque << " | Precisión: " << jugador.precision << " | Recuperación: " << jugador.recuperacion << endl;
         cout << "-------------------------------------------" << endl;
 
         switch (current_node->habitacion->tipo_habitacion) {
