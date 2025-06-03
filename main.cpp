@@ -967,7 +967,7 @@ void iniciarCombate(Jugador* jugador, ColaEnemigos* enemigos_en_combate, ArbolTe
 }
 
 // Función para resolver un evento
-void resolverEvento(Jugador* jugador, EventoPrincipal* evento, NodoArbol*& current_node, NodoArbol* previous_node, string nombre_protagonista) {
+void resolverEvento(Jugador* jugador, EventoPrincipal* evento, NodoArbol*& current_node, string nombre_protagonista, ArbolTernario* mi_arbol) {
     cout << "\n--- EVENTO: " << evento->nombre << " ---" << endl;
     cout << evento->descripcion_general << endl;
 
@@ -998,7 +998,13 @@ void resolverEvento(Jugador* jugador, EventoPrincipal* evento, NodoArbol*& curre
         opcion_elegida = &evento->opcion_B;
     }
 
-    cout << "\nRespuesta: " << opcion_elegida->descripcion << endl;
+    if ((evento->nombre == "Frasco extraño") && (eleccion == 'A')) {
+        if (mi_arbol->nodos_del_arbol_por_id[34] != nullptr) {
+            current_node->hijo_der = mi_arbol->nodos_del_arbol_por_id[34];
+        }
+    }
+
+    cout << "\n" << opcion_elegida->descripcion << endl;
 
     // Aplicar consecuencias
     if (opcion_elegida->consec_danio > 0) {
@@ -1025,17 +1031,8 @@ void resolverEvento(Jugador* jugador, EventoPrincipal* evento, NodoArbol*& curre
         jugador->aumentarRecuperacion(opcion_elegida->consec_mejora_recuperacion);
         cout << "La recuperación de " << nombre_protagonista << " ha sido mejorada. Recuperación actual: " << jugador->recuperacion << endl;
     }
-    if (opcion_elegida->consec_volver_anterior) {
-        if (previous_node != nullptr) {
-            current_node = previous_node; // Regresa al nodo ante-anterior
-            cout << "Has vuelto a la habitación anterior!" << endl;
-        } else {
-            cout << "No hay una habitación anterior a la que volver." << endl;
-        }
-    }
     
-    // Requisito 7: Recuperación de vida automática post-evento (si no hubo cura/daño directo en el evento)
-    // Se aplica solo si el evento no tuvo una consecuencia directa de vida (curar/dañar)
+    // Recuperación de vida automática post-evento (si no hubo cura/daño directo en el evento)
     if (opcion_elegida->consec_cura == 0 && opcion_elegida->consec_danio == 0) {
         cout << nombre_protagonista << " se recupera " << jugador->recuperacion << " puntos de vida." << endl;
         jugador->curarVida(jugador->recuperacion);
@@ -1072,7 +1069,7 @@ void juego(string archivo) {
     while (jugador.estaVivo() && current_node != nullptr) {
         bool flag; // Para saber si estamos en una habitación final.
         if (current_node->habitacion->tipo_habitacion == HabFin) {
-            bool flag = false;
+            flag = false;
         }
         cout << "\n-------------------------------------------" << endl;
         cout << "--- " << current_node->habitacion->nombre << " ---" << endl;
@@ -1087,7 +1084,7 @@ void juego(string archivo) {
             case HabEvento: {
                 EventoPrincipal* evento_elegido = mi_arbol.generarEventoAleatorio();
                 if (evento_elegido != nullptr) {
-                    resolverEvento(&jugador, evento_elegido, current_node, previous_node, nombre_protagonista);
+                    resolverEvento(&jugador, evento_elegido, current_node, nombre_protagonista, &mi_arbol);
                     // previous_node podría haber cambiado si el evento era el de "volver atrás"
                 } else {
                     cout << "Error: No se pudo generar un evento aleatorio." << endl;
@@ -1120,22 +1117,9 @@ void juego(string archivo) {
             }
             case HabFin:
                 cout << "Has llegado a un final!" << endl;
-                // Manejar requisito especial 3: Playa (ID 9)
-                if (current_node->habitacion->id == 9) {
-                    if (previous_node != nullptr) {
-                        current_node = previous_node; // Vuelve al nodo anterior
-                        cout << "El tiempo se distorsiona... Vuelves a la habitacion anterior!" << endl;
-                        cout << "Presiona ENTER para continuar..." << endl;
-                        cin.get();
-                        continue; // Vuelve al inicio del bucle para procesar el nodo anterior
-                    } else {
-                        cout << "Pero no hay un lugar anterior al que volver. Fin del juego." << endl;
-                        jugador.recibirDanio(jugador.vida); // Simula el fin del juego
-                    }
-                } else {
-                    jugador.recibirDanio(jugador.vida); // Simula el fin del juego para otros finales
-                }
+                jugador.recibirDanio(jugador.vida); // Simula el fin del juego para otros finales
                 break;
+
             case HabErroneo:
                 cout << "Error: Tipo de habitación desconocido. Saliendo del juego." << endl;
                 jugador.recibirDanio(jugador.vida); // Terminar el juego

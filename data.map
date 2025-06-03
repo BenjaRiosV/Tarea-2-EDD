@@ -1,6 +1,6 @@
 INICIO DE ARCHIVO
 HABITACIONES
-33
+34
 0 Apartamento de FEDRA (INICIO)
 El mundo ha sido devastado por una pandemia fúngica que convierte a los humanos en criaturas agresivas y mutantes, los "Infectados" por el hongo CordyCeps. La civilización colapsó y los pocos supervivientes luchan por existir en zonas de cuarentena controladas por la milicia FEDRA, o en asentamientos independientes fuera de ellas. En este paisaje desolado, la esperanza es un bien escaso, y la crueldad, una constante. La penumbra se cierne sobre tu pequeño apartamento dentro de la zona de cuarentena de FEDRA. El aire es pesado con el silencio roto solo por la respiración irregular de tu madre en la habitación contigua. Atada a la cama, su cuerpo convulsiona ocasionalmente, las grotescas formaciones fúngicas comenzando a brotar de su piel. El miedo y la desesperación te corroen. Tienes tu cuchillo en la mano, la única forma de acabar con su sufrimiento...
 1 Buscar una cura (COMBATE)
@@ -69,6 +69,8 @@ Has explorado cada calle y cada edificio de la ciudad, un laberinto de concreto 
 El hambre te corroe. Después de días de búsqueda incesante, encuentras unos alimentos en un rincón oscuro, un bocado de aparente salvación. La desesperación te empuja a comer sin dudar. El alivio inicial se convierte en un dolor agudo, un ardor que se extiende por tu cuerpo. El veneno actúa rápido. Caes al suelo, tu visión se nubla, la garganta arde. No hay tiempo para arrepentimientos, solo la amarga comprensión de tu error. Mueres solo, víctima de una trampa silenciosa y cruel.
 33 Decides descanzar (FIN)
 Las heridas de tu viaje te pesan. Al llegar a la cabaña del cazador, decides que es el momento de descansar, de aliviar el dolor que te carcome el cuerpo. Te dejas caer en el suelo, agotada, y el sueño te reclama casi de inmediato. Es un sueño profundo, sin perturbaciones, el primero en mucho tiempo. Pero no hay mañana para Maya. El esfuerzo y la desesperación de tu búsqueda finalmente te han cobrado su precio definitivo. Un descanso del que ya no despertarás.
+34 Ir a probar la cura en tu madre (FIN)
+Regresas a tu pequeño apartamento en la zona de cuarentena de FEDRA. El aire sigue siendo pesado, y la respiración irregular de tu madre te rompe el corazón. El frasco de la cura, tu única esperanza, brilla en tu mano. Con manos temblorosas y el corazón latiéndote a mil, inyectas el líquido en su cuerpo. Observas con una mezcla de terror y anhelo cómo el Cordyceps en su piel reacciona, se retuerce y, lentamente, comienza a disolverse. El hongo muere, retrocede, liberando su cuerpo de la grotesca prisión. La "cura" ha funcionado.Pasan unos momentos que se sienten como una eternidad. De repente, tu madre tose, sus ojos se abren lentamente y te miran con confusión. Está débil, desorientada y el hongo ha dejado cicatrices permanentes en su piel, un testimonio de lo que ha sobrevivido. Pero está viva. Te quedas arrodillada a su lado, las lágrimas corriendo por tu rostro.
 ARCOS
 32
 0 -> 1
@@ -111,7 +113,7 @@ Chasqueador | Vida 60 | Ataque 7 | Precision 0.6 | Probabilidad 0.7
 Hinchado | Vida 100 | Ataque 12 | Precision 0.4 | Probabilidad 0.2
 Mercenario | Vida 45 | Ataque 5 | Precision 0.9 | Probabilidad 0.5
 EVENTOS
-2
+7
 &
 Cofre
 Probabilidad 0.3
@@ -124,7 +126,7 @@ Se ve sospechoso, prefieres no arriesgarte. Lo dejas pasar.
 Ninguna consecuencia.
 &
 Mochila olvidada
-Probabilidad 0.4
+Probabilidad 0.3
 Encuentras una mochila de excursionista colgando de un árbol seco. Parece intacta, casi como si su dueño la hubiera dejado hace solo un momento. ¿Qué haces?
 A: Abrirla
 Con la esperanza de encontrar suministros, abres la mochila. Dentro, hay un pequeño alijo de raciones y una botella de agua.
@@ -144,14 +146,14 @@ El aspecto del diario es demasiado perturbador. Con un nudo en el estómago, dec
 Ninguna consecuencia.
 &
 Clavo
-Probabilidad 0.4
+Probabilidad 0.3
 Pisas un clavo oxidado por error. El dolor invade todo tu cuerpo. Ves que se encuentra muy profundo en tu pie. ¿Qué haces?
 A: Sacarlo
 Reunes valor y arrancas el clavo sin pensarlo. El dolor es horrible, pero por lo menos ya no molestará el caminar.
 -10 Vida
 B: Dejarlo
 Decides dejar el calvo en tu pie para evitar desangrarte. Pero el dolor al caminar es tan terrible que no puedes concentrarte.
--0.1 precision
+-0.1 Precision
 &
 Ratas
 Probabilidad 0.3
@@ -161,7 +163,7 @@ No hay escapatoria. Levantas tu arma y te abalanzas sobre las criaturas. Las apl
 -10 Vida
 B: Intentar espantarlas y pasar
 Haces ruido, gritas, intentas disuadirlas para que se alejen. Algunas retroceden, pero otras, más audaces, se abalanzan sobre ti, mordisqueando tus piernas mientras intentas pasar rápidamente.
--5 Vida
+-1 Recuperacion
 &
 Sentimiento
 Probabilidad 0.3
@@ -172,6 +174,16 @@ El descanso inesperado te permite recuperar fuerzas. Te despiertas sintiéndote 
 B: Tratas de continuar
 El mareo se intensifica, te tropiezas y caes torpemente. Tu cuerpo resiente el esfuerzo.
 -5 Vida
+&
+Frasco extraño
+Probabilidad 0.1
+Encuentras un pequeño frasco de vidrio etiquetado simplemente como 'Cura'. El líquido en su interior brilla con una luz tenue y esperanzadora. Puede que sea una trampa puesta por alguien, quiza solo contiene un liquido que te matará. Pero la posibilidad de curar a tu madre te hace desear cree. ¿Qué haces?
+A: Guardas el frasco.
+La esperanza de poder curar a tu madre te da fuerzas y deseos de continuar. ¿Deberías volver con tu madre?
++5 Ataque
+B: Dejar el frasco
+El demasiado arriesgado, prefieres no confiar la vida de tu madre al azar.
++0.1 Precision
 MEJORAS DE COMBATE
 +10 Vida
 +0.1 Precision
