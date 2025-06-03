@@ -1,15 +1,13 @@
-// Main de la Tarea 2 EDD
-
 #include <iostream>
 #include <string>
 #include <fstream> // Para manejo de archivos
-#include <random>  // Para números aleatorios (permitido por la tarea)
-#include <limits>  // Para numeric_limits (permitido por la tarea)
-#include <cctype>  // Para isdigit (permitido por la tarea)
+#include <random>  // Para números aleatorios
+#include <limits>  // Para numeric_limits
+#include <cctype>  // Para isdigit
 
 using namespace std;
 
-// Generadores de números aleatorios globales (permitido por la tarea)
+// Generadores de números aleatorios globales 
 random_device rd;
 mt19937 gen(rd());
 uniform_real_distribution<> dis(0.0, 1.0); // Distribución uniforme entre 0.0 y 1.0 para precisión y probabilidad
@@ -21,9 +19,9 @@ public:
     int vida;
     int ataque;
     double precision;
-    int recuperacion; // Capacidad de recuperación de vida post-combate/evento
+    int recuperacion; 
 
-    // Constructor usando asignación en el cuerpo (según tu preferencia)
+    // Constructor.
     Jugador(int vida_inicial, int ataque_inicial, double precision_inicial, int recuperacion_inicial) {
         vida = vida_inicial;
         ataque = ataque_inicial;
@@ -42,7 +40,6 @@ public:
     // Aumenta la vida del jugador.
     void curarVida(int cantidad) {
         vida += cantidad;
-        // Podrías añadir un límite máximo de vida si lo deseas, por ahora no está en el PDF
     }
 
     // Aumenta el valor de ataque del jugador.
@@ -53,7 +50,7 @@ public:
     // Aumenta la precisión del jugador.
     void aumentarPrecision(double cantidad) {
         precision += cantidad;
-        if (precision > 1.0) { // La precisión no puede exceder 1.0 (100%)
+        if (precision > 1.0) { // La precisión no puede exceder 1.0
             precision = 1.0;
         }
     }
@@ -73,7 +70,7 @@ public:
 
     // Realiza un ataque a un enemigo.
     // Retorna true si el ataque es exitoso (impacta), false si falla.
-    bool atacar(class Enemigo* enemigo); // Declaración forward para evitar dependencia circular inmediata
+    bool atacar(class Enemigo* enemigo);
 };
 
 class Enemigo {
@@ -83,7 +80,7 @@ public:
     int ataque;
     double precision;
 
-    // Constructor usando asignación en el cuerpo
+    // Constructor
     Enemigo(string n, int v, int a, double p) {
         nombre = n;
         vida = v;
@@ -106,10 +103,10 @@ public:
 
     // Realiza un ataque a un jugador.
     // Retorna true si el ataque es exitoso (impacta), false si falla.
-    bool atacar(Jugador* jugador); // Declaración forward
+    bool atacar(Jugador* jugador);
 };
 
-// Implementaciones de los métodos atacar fuera de la clase para evitar forward declaration issues si se definen dentro
+// Implementaciones de los métodos atacar fuera de la clase
 bool Jugador::atacar(Enemigo* enemigo) {
     double probabilidad_generada = dis(gen); // Genera un número aleatorio entre 0.0 y 1.0
     if (probabilidad_generada <= precision) { // Si el número aleatorio es menor o igual a la precisión del jugador
@@ -128,7 +125,7 @@ bool Enemigo::atacar(Jugador* jugador) {
     return false; // Ataque fallido
 }
 
-// --- Cola de Enemigos (para Combate) ---
+// --- Cola de Enemigos ---
 
 class NodoColaEnemigos {
 public:
@@ -141,7 +138,7 @@ public:
         siguiente = nullptr;
     }
 
-    // Destructor: Importante para liberar la memoria del enemigo que contiene
+    // Destructor
     ~NodoColaEnemigos() {
         if (enemigo != nullptr) {
             delete enemigo; // Libera el objeto Enemigo
@@ -157,20 +154,19 @@ private:
     int tamano;
 
 public:
-    // Constructor: Inicializa una cola vacía.
+    // Constructor.
     ColaEnemigos() {
         frente = nullptr;
         final = nullptr;
         tamano = 0;
     }
 
-    // Destructor: Libera toda la memoria ocupada por los nodos de la cola y los enemigos.
+    // Destructor
     ~ColaEnemigos() {
             while (!isEmpty()) {
-                // dequeue ya se encarga de liberar el nodo y el enemigo
                 Enemigo* enemigo_desencolado = dequeue();
                 if (enemigo_desencolado != nullptr) {
-                    delete enemigo_desencolado; // ¡Liberar la memoria del Enemigo* devuelto!
+                    delete enemigo_desencolado; // Liberar la memoria del Enemigo* devuelto
                     enemigo_desencolado = nullptr;
             }
         }
@@ -256,7 +252,7 @@ struct Mejoras {
 
 // Representa una opción dentro de un evento
 struct OpcionEvento {
-    char id_opcion; // 'A', 'B', etc.
+    char id_opcion; // 'A', 'B'.
     string enunciado;
     string descripcion;
     // Consecuencia del evento
@@ -266,9 +262,9 @@ struct OpcionEvento {
     int consec_mejora_ataque;
     double consec_mejora_precision;
     int consec_mejora_recuperacion;
-    bool consec_volver_anterior; // Para el requisito especial 3 (Playa)
+    bool consec_volver_anterior; // Para el requisito especial
 
-    // Constructor que inicializa todo a 0/null
+    // Constructor
     OpcionEvento() {
         id_opcion = ' ';
         enunciado = "";
@@ -290,7 +286,6 @@ struct EventoPrincipal {
     string descripcion_general;
     OpcionEvento opcion_A;
     OpcionEvento opcion_B;
-    // Podrías añadir más opciones si el formato del .map lo permitiera, pero el PDF muestra solo A y B
 
     // Constructor
     EventoPrincipal() {
@@ -329,20 +324,19 @@ public:
     TipoHabitacion tipo_habitacion;
     string descripcion_habitacion;
 
-    // Constructor usando asignación en el cuerpo
+    // Constructor
     Habitacion(int i, string n, TipoHabitacion th, string dh) {
         id = i;
         nombre = n;
         tipo_habitacion = th;
         descripcion_habitacion = dh;
     }
-    // No necesita destructor si no maneja memoria dinámica propia (punteros a otros objetos)
 };
 
 // Clase NodoArbol: Representa un nodo en el árbol ternario
 class NodoArbol {
 public:
-    Habitacion* habitacion; // Puntero a la habitación que contiene este nodo
+    Habitacion* habitacion;
     NodoArbol* hijo_izq;
     NodoArbol* hijo_cen;
     NodoArbol* hijo_der;
@@ -355,19 +349,17 @@ public:
         hijo_der = nullptr;
     }
 
-    // Destructor: Libera la memoria de la habitación que contiene
+    // Destructor
     ~NodoArbol() {
         if (habitacion != nullptr) {
             delete habitacion; // Libera el objeto Habitacion
             habitacion = nullptr;
         }
-        // No borra los hijos, ya que el destructor del árbol se encarga de recorrer y eliminar
-        // para evitar eliminaciones dobles y asegurar que todos los nodos se liberen una vez.
     }
 };
 
 
-// --- Arbol Ternario (Estructura Principal del Mapa) ---
+// --- Arbol Ternario ---
 
 class ArbolTernario {
 public:
@@ -436,7 +428,7 @@ public:
 
     // --- Métodos para cargar el mapa desde archivo ---
 
-    // Función auxiliar para parsear consecuencias (modificada para no usar stringstream)
+    // Función auxiliar para parsear consecuencias.
     void LeerConsecuencia(const string& s, OpcionEvento& opcion) {
         opcion.consec_danio = 0;
         opcion.consec_cura = 0;
@@ -487,11 +479,7 @@ public:
         string line;
         int current_section = 0; // 0: None, 1: HABITACIONES, 2: ARCOS, 3: ENEMIGOS, 4: EVENTOS, 5: MEJORAS_DE_COMBATE
 
-        // --- Fase 1: Determinar el max_id_habitacion para dimensionar arreglos ---
-        // Se hace un primer paso por el archivo para encontrar el ID más grande.
-        // Esto es necesario porque no sabemos el tamaño del arreglo de antemano sin STL.
-        // Luego el archivo se vuelve a abrir (o se reinicia el puntero de lectura).
-
+        // --- Determinar el max_id_habitacion para dimensionar arreglos ---
         string temp_line;
         int temp_max_id = -1;
         bool in_habitaciones_section_temp = false;
@@ -1019,18 +1007,19 @@ void juego(string archivo) {
     NodoArbol* current_node = mi_arbol.raiz;
     NodoArbol* previous_node = nullptr; // Para el requisito de volver al nodo anterior
 
-    cout << "Bienvenido a la Aventura de Estructuras de Datos!" << endl;
+    cout << "---------------------------------------------------------" << endl;
+    cout << "--- Bienvenido a la Aventura de Estructuras de Datos! ---" << endl;
+    cout << "---------------------------------------------------------" << endl;
 
     string nombre_protagonista;
     cout << "\n" << "Escoge tu nombre: "; getline(cin, nombre_protagonista);
 
     while (jugador.estaVivo() && current_node != nullptr) {
         cout << "\n----------------------------------------" << endl;
-        cout << "Estás en: " << current_node->habitacion->nombre << endl;
-        cout << "Descripción: " << current_node->habitacion->descripcion_habitacion << endl;
-        cout << "Vida de " << nombre_protagonista << ": " << jugador.vida << " | Ataque: " << jugador.ataque 
-             << " | Precisión: " << jugador.precision << " | Recuperación: " << jugador.recuperacion << endl;
-        cout << "----------------------------------------" << endl;
+        cout << "--- " << current_node->habitacion->nombre << " ---" << endl;
+        cout << current_node->habitacion->descripcion_habitacion << endl;
+        cout << "Vida de " << nombre_protagonista << ": " << jugador.vida << endl;
+        cout << "----------------------------------------\n" << endl;
 
         switch (current_node->habitacion->tipo_habitacion) {
             case HabInicio:
@@ -1155,6 +1144,6 @@ void juego(string archivo) {
 }
 
 int main() {
-    string mapa = "ejemplo.map";
+    string mapa = "data.map";
     juego(mapa);
 }

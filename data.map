@@ -106,10 +106,10 @@ ARCOS
 21 -> 33
 ENEMIGOS
 4
-Corredor | Vida 10 | Ataque 3 | presicion 0.8 | Probabilidad 0.9
-Chasqueador | Vida 20 | Ataque 7 | presicion 0.6 | Probabilidad 0.7
-Hinchado | Vida 50 | Ataque 12 | presicion 0.4 | Probabilidad 0.2
-Mercenario | Vida 15 | Ataque 5 | presicion 0.9 | Probabilidad 0.5
+Corredor | Vida 30 | Ataque 3 | Precision 0.8 | Probabilidad 0.9
+Chasqueador | Vida 60 | Ataque 7 | Precision 0.6 | Probabilidad 0.7
+Hinchado | Vida 100 | Ataque 12 | Precision 0.4 | Probabilidad 0.2
+Mercenario | Vida 45 | Ataque 5 | Precision 0.9 | Probabilidad 0.5
 EVENTOS
 2
 &
@@ -133,8 +133,8 @@ B: Tratas de continuar
 El mareo se intensifica, te tropiezas y caes torpemente. Tu cuerpo resiente el esfuerzo.
 -5 Vida
 MEJORAS DE COMBATE
-+5 Vida
++10 Vida
 +0.1 Precision
-+1 Ataque
-+1 Recuperacion
++5 Ataque
++5 Recuperacion
 FIN DE ARCHIVO
