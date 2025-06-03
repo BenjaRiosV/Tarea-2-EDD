@@ -17,13 +17,13 @@ Entras a lo que fue un edificio de apartamentos, ahora un laberinto de escombros
 La autopista está desmoronándose, con coches abandonados y vegetación reclamando el asfalto. Es un lugar expuesto, pero ofrece una ruta rápida, si puedes sobrevivir a los peligros. El viento silba, llevando consigo los lamentos distantes de los infectados.
 7 Refugio Subterráneo (COMBATE)
 Un laberinto de túneles oscuros y húmedos. El eco de los chasquidos de los Clickers resuena, amplificado en la oscuridad. El peligro es constante, pero esta ruta subterránea podría ser la más segura para evitar los peligros de la superficie.
-8 Seguir Buscando (FINAL)
+8 Seguir Buscando (FIN)
 Caes en una trampa brutal tendida por saqueadores. No son infectados, sino humanos tan rotos y salvajes como las bestias. Te desnudan de tus pertenencias y te dejan herida, sola, y sin posibilidad de continuar.
 9 Museo de historia natural (EVENTO)
 Un museo majestuoso, ahora un eco de un pasado que ya no existe. Las exhibiciones están destrozadas, pero la estructura sigue en pie. Podría haber archivos o pistas sobre los esfuerzos de la humanidad para detener la pandemia en sus inicios.
 10 Galerías Subterráneas (EVENTO)
 Una serie de antiguas galerías subterráneas, posiblemente minas o túneles de contrabando. El aire es denso y el camino, traicionero. Podría haber reliquias de un mundo pasado, o quizás, una forma de evitar los peligros de la superficie.
-11 Base Militar a lo lejos (FINAL)
+11 Base Militar a lo lejos (FIN)
 Tras interminables kilómetros de autopista desolada, tus ojos vislumbran una estructura imponente: una base militar que parece sorprendentemente intacta. La esperanza te inunda por un instante; quizás aquí haya suministros, un mapa, o incluso la clave para esa cura imposible. Con cautela, te acercas, pero antes de que puedas evaluar la situación, las luces de los reflectores te ciegan y una ráfaga de voces te ordena detenerte. Estás rodeada. En un arrebato final de desesperación, intentas una huida, un disparo rompe el silencio. Sientes un impacto brutal en la espalda, y luego otro. Caes al suelo, la sangre manchando el frío hormigón.
 12 Bosque (COMBATE)
 Abanzas por un bosque. Los árboles frondosos reducen la visibilidad, y los peligros pueden aparecer de la nada entre la naturaleza.
@@ -31,43 +31,43 @@ Abanzas por un bosque. Los árboles frondosos reducen la visibilidad, y los peli
 Un puesto de control de FEDRA abandonado. Vehículos militares destrozados y barricadas. La milicia se ha ido, pero quizás dejaron algo valioso, o una trampa.
 14 Entrada al Metro Profundo (COMBATE)
 La entrada a una estación de metro inusualmente profunda. El aire aquí es denso, casi irrespirable, con una humedad extraña. Es un lugar donde el Cordyceps prospera. El riesgo es máximo, pero las leyendas dicen que los viejos túneles llevan a lugares olvidados.
-15 Oficina de Correos (FINAL)
+15 Oficina de Correos (FIN)
 Mientras rebuscas entre los destrozos de la oficina de correos, buscando cualquier señal de esperanza, la estructura cede. Un crujido ensordecedor precede a una avalancha de estantes, archivadores y muebles podridos. No tienes tiempo de reaccionar. El peso te aplasta, el aire se escapa de tus pulmones. La oscuridad te consume al instante, sin dolor, sin despedida. Tu madre queda atrás, un pensamiento fugaz mientras el mundo se vuelve negro. Has sido una víctima más de un mundo en ruinas, tu búsqueda terminada bajo un montón de escombros.
 16 Estación de Autobuses Destrozada (EVENTO)
 Los restos de una estación de autobuses, con vehículos volcados y grafiti descolorido. El lugar está silencioso, pero la desolación grita historias de huidas fallidas. Podría haber algo de valor oculto en los escombros o una ruta inesperada.
-17 Seguir avanzando (FINAL)
+17 Seguir avanzando (FIN)
 Las galerías subterráneas te guían a un refugio improvisado, con el débil olor a humo de madera y el murmullo de voces humanas. La esperanza de encontrar ayuda te impulsa a entrar, pero la bienvenida es fría. Los supervivientes, endurecidos y paranoicos, te ven como una amenaza, no como una aliada. Sin mediar palabra, te acorralan. Un golpe certero te derriba y, mientras intentas reaccionar, la oscuridad te envuelve. En este mundo, la lealtad es un lujo y la desconfianza, una sentencia de muerte.
 18 Salir de la galería (COMBATE)
 Sales de la galería. Un viejo puente peatonal que se tambalea peligrosamente. Las tablas podridas y los cables expuestos lo hacen un paso arriesgado, pero ofrece una vista panorámica... y una oportunidad para ser detectado. El viento sopla, trayendo consigo el hedor de la muerte.
-19 Santuario lejano (FINAL)
+19 Santuario lejano (FIN)
 Encuentras una pequeña comunidad aislada, oculta en un valle. Han logrado sobrevivir, pero su existencia es una negación. Han renunciado a la búsqueda de una cura, viviendo día a día sin mirar al futuro. Te ofrecen refugio, un lugar seguro donde podrías descansar, pero al verlos, entiendes que la cura que buscabas no está aquí, ni nunca la buscarán. Tu madre sigue atada al Cordyceps, y tú te quedas, una superviviente más, con el peso de su memoria, sabiendo que tu viaje no pudo traerle la paz.
 20 Ciudad a la lejanía (EVENTO)
 La autopista te lleva a una ciudad en ruinas. Los rascacielos vacíos son esqueletos de cristal, mudos testigos de un mundo muerto. El silencio es total, solo roto por el crujido de escombros bajo tus botas o el viento que silba. No hay infectados a la vista, pero tampoco señales de vida. Es un museo macabro de una civilización perdida, un lugar donde cada sombra guarda un recuerdo o una advertencia. Aquí, la soledad es tan peligrosa como cualquier criatura.
 21 Cabaña del Cazador a lo lejos (EVENTO)
 Una pequeña cabaña aislada en las profundidades del bosque. Parece haber sido habitada recientemente. Quizás el cazador dejó algo útil, o es una trampa. Cada pista es vital. Además el hambre lentamente te está dejando sin fuerzas.
-22 Seguir la busqueda (FINAL)
+22 Seguir la busqueda (FIN)
 El sonido de botas militares te congela. Antes de que puedas esconderte, un escuadrón de FEDRA emerge de la niebla. Su disciplina es brutal; no hay interrogatorios, solo la fría certeza de que eres una intrusa, una amenaza. Te disparan sin dudar, sin piedad, sin palabras. 
-23 Papeles sospechosos (FINAL)
+23 Papeles sospechosos (FIN)
 Has encontrado la verdad en los datos, en los experimentos fallidos. La 'cura' que buscas no es una salvación, sino una quimera, o peor aún, un nuevo tipo de arma biológica diseñada para contener, no para sanar. Los científicos que la crearon sabían que no había vuelta atrás para los ya infectados, y sus 'soluciones' eran tan inhumanas como la plaga misma. Con una furia silenciosa y un corazón roto, destruyes todos los papeles para finalmente quitarte tu propia vida.
-24 Segir por la izquierda (FINAL)
+24 Segir por la izquierda (FIN)
 Te adentras en el metro, la oscuridad y el aire denso te envuelven. Los sonidos de los infectados, amplificados por los túneles, te rodean por completo. Intentas luchar, pero son demasiados, un mar de monstruosidades que el hongo ha gestado en la profundidad. Los chasquidos, gruñidos y gritos se convierten en el último sonido que escuchas antes de que te abrumen. Mueres destrozada por las criaturas, una víctima más de la oscuridad que se esconde bajo tierra, tu búsqueda silenciosamente olvidada en la tumba de ruido del metro.
-25 Seguir por la derecha (FINAL)
+25 Seguir por la derecha (FIN)
 Te abres paso por los túneles del metro, siguiendo una tenue luz al final de lo que parece un largo pasillo. La promesa de una salida, quizás de un refugio, te impulsa. Pero el suelo es traicionero y el aire irrespirable te nubla la vista. Tropiezas, caes, y tu linterna se rompe. La oscuridad total te consume. A medida que tus pulmones arden y la conciencia se desvanece por la falta de oxígeno y la presión del aire viciado, tu mente evoca el rostro de tu madre. La esperanza de la cura, la promesa que le hiciste, se quiebra con tu último aliento en la claustrofobia sofocante de las profundidades.
-26 Voces extrañas (FINAL)
+26 Voces extrañas (FIN)
 Agotada y al límite, te encuentras con un pequeño grupo de supervivientes que han abrazado una dura verdad: para algunos, la única cura es el descanso. Te muestran cómo han liberado a sus propios seres queridos de la prisión del Cordyceps, no con violencia, sino con una piedad devastadora. Te ofrecen un camino para tu madre, no una cura para la infección, sino una liberación de la agonía. Te das cuenta de que has luchado por una ilusión. Con la ayuda de este grupo, regresas a tu apartamento. En un acto de amor insoportable, liberas a tu madre. Ella ya no está, solo queda un cuerpo que vuelve al polvo. No hay milagro, solo la aceptación.
-27 Autobus extraño (FINAL)
+27 Autobus extraño (FIN)
 Mientras buscas algo de valor entre los escombros de la estación, descubres un compartimento oculto en uno de los autobuses volcados. La curiosidad te impulsa a investigarlo. De repente, una masa de infectados se abalanza desde la oscuridad. Era un nido, un escondite que no viste. Intentas luchar, pero la sorpresa y el espacio reducido te condenan. Los chasqueadores te abruman con una velocidad espantosa. Tu búsqueda termina en un grito sofocado, convertida en otra víctima silenciosa en el corazón de la desolación.
-28 Hospital a lo lejos (FINAL)
+28 Hospital a lo lejos (FIN)
 Logras llegar a una zona de cuarentena, supuestamente segura, pero el lugar es un infierno viviente. Superpoblado, sin recursos, y la enfermedad, a pesar de las barreras, se propaga silenciosamente, consumiendo a los pocos que quedan. Aquí no hay cura, solo contención y una muerte lenta para todos. Ves la desesperación en los ojos de los demás, un reflejo de lo que esperaría a tu madre si aún 'viviera'. Te enfermas, te debilitas. Mueres lentamente de agotamiento y desesperanza, el rostro infectado de tu madre persiguiéndote hasta el final.
-29 Humo a lo lejos (FINAL)
+29 Humo a lo lejos (FIN)
 Con cautela intentas bajar del puente, avanzas, pero al intentar descender, la estructura cruje con un sonido ominoso. El metal oxidado cede bajo tus pies. Caes. El impacto es brutal y final. Tu cuerpo golpea los escombros de abajo, la oscuridad te reclama de inmediato. 
-30 Laboratorio a lo lejos (FINAL)
+30 Laboratorio a lo lejos (FIN)
 En un lugar que parecía imposible, encuentras un laboratorio secreto, aún operativo, donde un grupo de científicos aislados ha logrado un avance significativo en la erradicación del Cordyceps. Vuelves con tu madre y le inyectas la cura, pero ya es muy tarde, el Cordyceps ya había matado a tu madre, solo ves como la inyección abandona el cuerpo de tu ya muerta madre. La cura existe, pero no para quien ya se fue.
-31 Seguir explorando (FINAL)
+31 Seguir explorando (FIN)
 Has explorado cada calle y cada edificio de la ciudad, un laberinto de concreto y escombros. No hay un alma, solo el eco de tus pasos y el viento entre las ruinas. Ni infectados, ni supervivientes, ni rastro de lo que buscabas. El peso del viaje, la soledad y la devastadora verdad de que no queda nada te consumen. Tu cuerpo, extenuado, cede. Caes al suelo, sin fuerzas para seguir. Tu madre se desvanece de tus pensamientos mientras la oscuridad te abraza. La ciudad se convierte en tu tumba silenciosa.
-32 Buscar comida (FINAL)
+32 Buscar comida (FIN)
 El hambre te corroe. Después de días de búsqueda incesante, encuentras unos alimentos en un rincón oscuro, un bocado de aparente salvación. La desesperación te empuja a comer sin dudar. El alivio inicial se convierte en un dolor agudo, un ardor que se extiende por tu cuerpo. El veneno actúa rápido. Caes al suelo, tu visión se nubla, la garganta arde. No hay tiempo para arrepentimientos, solo la amarga comprensión de tu error. Mueres solo, víctima de una trampa silenciosa y cruel.
-33 Decides descanzar (FINAL)
+33 Decides descanzar (FIN)
 Las heridas de tu viaje te pesan. Al llegar a la cabaña del cazador, decides que es el momento de descansar, de aliviar el dolor que te carcome el cuerpo. Te dejas caer en el suelo, agotada, y el sueño te reclama casi de inmediato. Es un sueño profundo, sin perturbaciones, el primero en mucho tiempo. Pero no hay mañana para Maya. El esfuerzo y la desesperación de tu búsqueda finalmente te han cobrado su precio definitivo. Un descanso del que ya no despertarás.
 ARCOS
 32

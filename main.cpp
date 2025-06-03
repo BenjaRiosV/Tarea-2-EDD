@@ -1024,7 +1024,6 @@ void juego(string archivo) {
         switch (current_node->habitacion->tipo_habitacion) {
             case HabInicio:
                 // Solo un punto de partida, no hay acción especial
-                cout << "Es el inicio de tu aventura. Explora los caminos." << endl;
                 break;
             case HabEvento: {
                 EventoPrincipal* evento_elegido = mi_arbol.generarEventoAleatorio();
@@ -1090,7 +1089,7 @@ void juego(string archivo) {
         }
 
         // Mostrar opciones de movimiento
-        cout << "\nA donde quieres ir?" << endl;
+        cout << "\nA dónde quieres ir?" << endl;
         if (current_node->hijo_izq != nullptr) {
             cout << "1. " << current_node->hijo_izq->habitacion->nombre << endl;
         }
