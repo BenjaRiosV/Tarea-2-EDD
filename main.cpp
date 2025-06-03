@@ -186,9 +186,9 @@ public:
         tamano++;
     }
 
-     void listarEnemigos() {
+    void listarEnemigos() {
         if (isEmpty()) {
-            cout << "No hay enemigos en la cola." << endl;
+            cout << "No hay enemigos";
             return;
         }
         NodoColaEnemigos* actual = frente;
@@ -203,7 +203,40 @@ public:
         }
         cout << "!" << endl;
     }
+    
+    void mostrarEnemigosEnCombate() {
+        if (isEmpty()) {
+            cout << "No hay enemigos";
+            return;
+        }
+        NodoColaEnemigos* actual = frente;
+        int count = 0;
+        while (actual != nullptr) {
+            if (count > 0) {
+                cout << " | ";
+            }
+            cout << actual->enemigo->nombre;
+            actual = actual->siguiente;
+            count++;
+        }
+    }
 
+    void mostrarVidaEnemigosEnCombate() {
+        if (isEmpty()) {
+            cout << "No hay enemigos";
+            return;
+        }
+        NodoColaEnemigos* actual = frente;
+        int count = 0;
+        while (actual != nullptr) {
+            if (count > 0) {
+                cout << " | ";
+            }
+            cout << actual->enemigo->vida;
+            actual = actual->siguiente;
+            count++;
+        }
+    }
 
     // Método para sacar un enemigo del frente de la cola y devolverlo.
     // Retorna nullptr si la cola está vacía.
@@ -222,8 +255,6 @@ public:
         }
 
         nodo_a_eliminar->enemigo = nullptr; // Desvincular el enemigo del nodo antes de eliminar el nodo
-                                            // para que el destructor del nodo no intente eliminarlo de nuevo
-                                            // ya que lo estamos devolviendo.
         delete nodo_a_eliminar; // Liberar el nodo de la cola
 
         tamano--;
@@ -841,15 +872,13 @@ public:
 // Función para simular un combate
 void iniciarCombate(Jugador* jugador, ColaEnemigos* enemigos_en_combate, ArbolTernario* mi_arbol, string nombre_protagonista) {
 
-    cout << "\n----------------------------------------" << endl;
     cout << "Te enfrentas a ", enemigos_en_combate->listarEnemigos(); 
     cout << "\n--- COMBATE INICIADO! ---" << endl;
 
     while (jugador->estaVivo() && !enemigos_en_combate->isEmpty()) {
         Enemigo* enemigo_actual = enemigos_en_combate->peek(); // Ver al enemigo del frente
-        cout << "\n--------------------------" << endl;
-        cout << "Vida de " << nombre_protagonista << ": " << jugador->vida << endl;
-        cout << "Te enfrentas a: " << enemigo_actual->nombre << " (Vida: " << enemigo_actual->vida << ")" << endl;
+        cout << "\n" << nombre_protagonista << " | ", enemigos_en_combate->mostrarEnemigosEnCombate(); cout << endl;
+        cout << jugador->vida << " | ", enemigos_en_combate->mostrarVidaEnemigosEnCombate(); cout << endl;
 
         // Turno del jugador
         cout << "Presiona ENTER para atacar!" << endl;
@@ -857,22 +886,26 @@ void iniciarCombate(Jugador* jugador, ColaEnemigos* enemigos_en_combate, ArbolTe
 
         bool ataque_exitoso = jugador->atacar(enemigo_actual);
         if (ataque_exitoso) {
-            cout << "Has golpeado a " << enemigo_actual->nombre << "!" << endl;
+            cout << "Has golpeado a " << enemigo_actual->nombre << " por " << jugador->ataque << " de daño!" << endl;
             if (!enemigo_actual->estaVivo()) {
                 cout << enemigo_actual->nombre << " ha sido derrotado!" << endl;
                 enemigos_en_combate->dequeue(); // Sacar al enemigo derrotado de la cola
                 // El destructor de NodoColaEnemigos se encarga de 'delete enemigo_actual;'
+                continue;
             }
         } else {
             cout << "Tu ataque falló!" << endl;
         }
+
+        cout << "\n" << nombre_protagonista << " | ", enemigos_en_combate->mostrarEnemigosEnCombate(); cout << endl;
+        cout << jugador->vida << " | ", enemigos_en_combate->mostrarVidaEnemigosEnCombate(); cout << "\n" << endl;
 
         // Si jugador sigue viva y el enemigo actual sigue vivo (o era el último y no hay más)
         if (jugador->estaVivo() && enemigo_actual->estaVivo()) {
             // Turno del enemigo
             bool enemigo_impacta = enemigo_actual->atacar(jugador);
             if (enemigo_impacta) {
-                cout << enemigo_actual->nombre << " te ha golpeado! Vida restante: " << jugador->vida << endl;
+                cout << enemigo_actual->nombre << " te ha golpeado! Pierdes " << enemigo_actual->ataque << " de vida!" << endl;
             } else {
                 cout << enemigo_actual->nombre << " falló su ataque!" << endl;
             }
@@ -882,20 +915,20 @@ void iniciarCombate(Jugador* jugador, ColaEnemigos* enemigos_en_combate, ArbolTe
     cout << "\n--- FIN DE COMBATE ---" << endl;
 
     if (!jugador->estaVivo()) {
-        cout << nombre_protagonista << " ha sido derrotada... GAME OVER!" << endl;
+        cout << nombre_protagonista << " ha sido derrotada..." << endl;
     } else {
         cout << "Has ganado el combate!" << endl;
         // Requisito 7: Recuperación de vida automática post-combate
-        cout << nombre_protagonista << " se recupera " << jugador->recuperacion << " puntos de vida." << endl;
+        cout << nombre_protagonista << " recupera " << jugador->recuperacion << " de vida." << endl;
         jugador->curarVida(jugador->recuperacion);
-        cout << "Vida actual de " << nombre_protagonista << ": " << jugador->vida << endl;
+        cout << "Vida de " << nombre_protagonista << ": " << jugador->vida << endl;
 
         // Requisito 5: El jugador escoge UNA mejora
-        cout << "\nHas obtenido mejoras por tu victoria! Escoge UNA para aumentar:" << endl;
-        cout << "1. Vida (+" << mi_arbol->mejoras_combate_cargadas.vida << ")" << endl;
-        cout << "2. Ataque (+" << mi_arbol->mejoras_combate_cargadas.ataque << ")" << endl;
-        cout << "3. Precisión (+" << mi_arbol->mejoras_combate_cargadas.precision << ")" << endl;
-        cout << "4. Recuperación (+" << mi_arbol->mejoras_combate_cargadas.recuperacion << ")" << endl;
+        cout << "\nPuedes elegir mejoras por tu victoria! Escoge UNA para aumentar:" << endl;
+        cout << "1. Vida + " << mi_arbol->mejoras_combate_cargadas.vida << endl;
+        cout << "2. Ataque + " << mi_arbol->mejoras_combate_cargadas.ataque << endl;
+        cout << "3. Precisión + " << mi_arbol->mejoras_combate_cargadas.precision << endl;
+        cout << "4. Recuperación + " << mi_arbol->mejoras_combate_cargadas.recuperacion << endl;
         
         int opcion_mejora;
         bool opcion_valida = false;
@@ -1034,14 +1067,14 @@ void juego(string archivo) {
     cout << "---------------------------------------------------------" << endl;
 
     string nombre_protagonista;
-    cout << "\n" << "Escoge tu nombre: "; getline(cin, nombre_protagonista);
+    cout << "Escoge tu nombre: "; getline(cin, nombre_protagonista);
 
     while (jugador.estaVivo() && current_node != nullptr) {
-        cout << "\n----------------------------------------" << endl;
+        cout << "\n-------------------------------------------" << endl;
         cout << "--- " << current_node->habitacion->nombre << " ---" << endl;
         cout << current_node->habitacion->descripcion_habitacion << endl;
-        cout << "Vida de " << nombre_protagonista << ": " << jugador.vida << endl;
-        cout << "----------------------------------------\n" << endl;
+        cout << "Vida de " << nombre_protagonista << ": " << jugador.vida << " | Ataque: " << jugador.ataque << " | Precisión: " << jugador.precision << " | Recuperación: " << jugador.recuperacion << endl;
+        cout << "-------------------------------------------" << endl;
 
         switch (current_node->habitacion->tipo_habitacion) {
             case HabInicio:
@@ -1062,7 +1095,7 @@ void juego(string archivo) {
                 // Generar 1 a 3 enemigos aleatorios para el combate
                 uniform_int_distribution<> num_enemigos_dis(1, 3);
                 int cantidad_enemigos = num_enemigos_dis(gen);
-                cout << "Te enfrentas a " << cantidad_enemigos << " enemigos!" << endl;
+                cout << "Te encuentras a " << cantidad_enemigos << " enemigos!" << endl;
 
                 for (int i = 0; i < cantidad_enemigos; ++i) {
                     Enemigo* nuevo_enemigo = mi_arbol.generarEnemigoAleatorio();
@@ -1106,7 +1139,6 @@ void juego(string archivo) {
         }
 
         if (!jugador.estaVivo()) {
-            cout << "\nLa aventura de " << nombre_protagonista << " ha terminado." << endl;
             break; // Game Over
         }
 
@@ -1156,7 +1188,7 @@ void juego(string archivo) {
     }
 
     if (!jugador.estaVivo()) {
-        cout << "\nLa aventura ha terminado! " << nombre_protagonista << " no ha sobrevivido." << endl;
+        cout << "\nLa aventura ha terminado, " << nombre_protagonista << " no ha sobrevivido." << endl;
     } else {
         cout << "\nGracias por jugar!" << endl;
     }
