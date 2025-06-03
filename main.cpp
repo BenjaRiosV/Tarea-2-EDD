@@ -925,10 +925,10 @@ void iniciarCombate(Jugador* jugador, ColaEnemigos* enemigos_en_combate, ArbolTe
 
         // Requisito 5: El jugador escoge UNA mejora
         cout << "\nPuedes elegir mejoras por tu victoria! Escoge UNA para aumentar:" << endl;
-        cout << "1. Vida + " << mi_arbol->mejoras_combate_cargadas.vida << endl;
-        cout << "2. Ataque + " << mi_arbol->mejoras_combate_cargadas.ataque << endl;
-        cout << "3. Precisión + " << mi_arbol->mejoras_combate_cargadas.precision << endl;
-        cout << "4. Recuperación + " << mi_arbol->mejoras_combate_cargadas.recuperacion << endl;
+        cout << "1. Vida +" << mi_arbol->mejoras_combate_cargadas.vida << endl;
+        cout << "2. Ataque +" << mi_arbol->mejoras_combate_cargadas.ataque << endl;
+        cout << "3. Precisión +" << mi_arbol->mejoras_combate_cargadas.precision << endl;
+        cout << "4. Recuperación +" << mi_arbol->mejoras_combate_cargadas.recuperacion << endl;
         
         int opcion_mejora;
         bool opcion_valida = false;
@@ -1073,7 +1073,7 @@ void juego(string archivo) {
         cout << "\n-------------------------------------------" << endl;
         cout << "--- " << current_node->habitacion->nombre << " ---" << endl;
         cout << current_node->habitacion->descripcion_habitacion << endl;
-        cout << "Vida de " << nombre_protagonista << ": " << jugador.vida << " | Ataque: " << jugador.ataque << " | Precisión: " << jugador.precision << " | Recuperación: " << jugador.recuperacion << endl;
+        if (!HabFin) cout << "Vida de " << nombre_protagonista << ": " << jugador.vida << " | Ataque: " << jugador.ataque << " | Precisión: " << jugador.precision << " | Recuperación: " << jugador.recuperacion << endl;
         cout << "-------------------------------------------" << endl;
 
         switch (current_node->habitacion->tipo_habitacion) {
