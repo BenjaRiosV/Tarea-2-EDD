@@ -1054,7 +1054,7 @@ void juego(string archivo) {
     // Crear y cargar el mapa del juego
     ArbolTernario mi_arbol;
     if (!mi_arbol.cargarMapa(archivo)) {
-        cout << "Fallo al cargasr el mapa. Saliendo del juego." << endl;
+        cout << "Fallo al cargar el mapa. Saliendo del juego." << endl;
         return;
     }
 
