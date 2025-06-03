@@ -500,7 +500,7 @@ public:
         string s_val = s.substr(0, pos_valor_inicio); // Extraer el string del valor
 
         // Determinar el tipo de consecuencia y asignar el valor
-        if (s.find("PRECISION") != string::npos) {
+        if (s.find("Precision") != string::npos) {
             opcion.consec_mejora_precision = stod(s_val);
         } else if (s.find("Vida") != string::npos) {
             int valor_vida = stoi(s_val);

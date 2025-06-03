@@ -123,6 +123,46 @@ B: Dejarlo
 Se ve sospechoso, prefieres no arriesgarte. Lo dejas pasar.
 Ninguna consecuencia.
 &
+Mochila olvidada
+Probabilidad 0.4
+Encuentras una mochila de excursionista colgando de un árbol seco. Parece intacta, casi como si su dueño la hubiera dejado hace solo un momento. ¿Qué haces?
+A: Abrirla
+Con la esperanza de encontrar suministros, abres la mochila. Dentro, hay un pequeño alijo de raciones y una botella de agua.
++15 Vida
+B: Dejarla
+La sensación extraña te advierte. Decides que el riesgo de lo que pueda contener no vale la pena. Pasas de largo, priorizando tu seguridad.
+Ninguna consecuencia.
+&
+Diario mojado
+Probabilidad 0.3
+Entre los restos de un campamento improvisado, ves un diario cubierto de moho. Sus páginas están empapadas y el texto, borroso, pero la cubierta parece robusta. ¿Qué haces?
+A: Intentas leerlo
+Decides abrir el diario. Las páginas crujen y un olor nauseabundo a descomposición y hongo se eleva. Un olor fúngico sale disparado de las páginas, infectándote levemente.
+-1 Recuperacion
+B: Dejarlo
+El aspecto del diario es demasiado perturbador. Con un nudo en el estómago, decides dejarlo allí, permitiendo que sus secretos se descompongan con el tiempo.
+Ninguna consecuencia.
+&
+Clavo
+Probabilidad 0.4
+Pisas un clavo oxidado por error. El dolor invade todo tu cuerpo. Ves que se encuentra muy profundo en tu pie. ¿Qué haces?
+A: Sacarlo
+Reunes valor y arrancas el clavo sin pensarlo. El dolor es horrible, pero por lo menos ya no molestará el caminar.
+-10 Vida
+B: Dejarlo
+Decides dejar el calvo en tu pie para evitar desangrarte. Pero el dolor al caminar es tan terrible que no puedes concentrarte.
+-0.1 precision
+&
+Ratas
+Probabilidad 0.3
+Un chillido agudo te alerta. Un enjambre de ratas, con extrañas protuberancias fúngicas, corre por el suelo. Se mueven con una rapidez aterradora, y su mirada es agresiva. No puedes esquivarlas a todas en este espacio.
+A: Combatir y aplastarlas
+No hay escapatoria. Levantas tu arma y te abalanzas sobre las criaturas. Las aplastas una a una, pero algunas logran morderte. La asquerosidad del acto te perturba profundamente, pero las ratas son cosa del pasado.
+-10 Vida
+B: Intentar espantarlas y pasar
+Haces ruido, gritas, intentas disuadirlas para que se alejen. Algunas retroceden, pero otras, más audaces, se abalanzan sobre ti, mordisqueando tus piernas mientras intentas pasar rápidamente.
+-5 Vida
+&
 Sentimiento
 Probabilidad 0.3
 Una extraña sensación de debilidad te invade, acompañada de un zumbido en los oídos.
