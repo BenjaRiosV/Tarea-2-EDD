@@ -1067,7 +1067,7 @@ void juego(string archivo) {
     cout << "Escoge tu nombre: "; getline(cin, nombre_protagonista);
 
     while (jugador.estaVivo() && current_node != nullptr) {
-        bool flag; // Para saber si estamos en una habitación final.
+        bool flag = true; // Para saber si estamos en una habitación final.
         if (current_node->habitacion->tipo_habitacion == HabFin) {
             flag = false;
         }
