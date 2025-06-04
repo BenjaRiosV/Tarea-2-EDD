@@ -106,7 +106,7 @@ public:
     bool atacar(Jugador* jugador);
 };
 
-// Implementaciones de los métodos atacar fuera de la clase
+// Implementaciones de los métodos atacar fuera de la clase para evitar forward.
 bool Jugador::atacar(Enemigo* enemigo) {
     double probabilidad_generada = dis(gen); // Genera un número aleatorio entre 0.0 y 1.0
     if (probabilidad_generada <= precision) { // Si el número aleatorio es menor o igual a la precisión del jugador
@@ -186,6 +186,7 @@ public:
         tamano++;
     }
 
+    // Método para mostrar los enemigos dentro de la cola.
     void listarEnemigos() {
         if (isEmpty()) {
             cout << "No hay enemigos";
@@ -204,6 +205,7 @@ public:
         cout << "!" << endl;
     }
     
+    // Método para mostrar los enemigos que están en combate.
     void mostrarEnemigosEnCombate() {
         if (isEmpty()) {
             cout << "No hay enemigos";
@@ -221,6 +223,7 @@ public:
         }
     }
 
+    // Método para mostrar la vida de los enemigos en combate.
     void mostrarVidaEnemigosEnCombate() {
         if (isEmpty()) {
             cout << "No hay enemigos";
@@ -244,21 +247,16 @@ public:
         if (isEmpty()) {
             return nullptr;
         }
-
         NodoColaEnemigos* nodo_a_eliminar = frente;
         Enemigo* enemigo_desencolado = nodo_a_eliminar->enemigo; // Obtener el puntero al enemigo
 
         frente = frente->siguiente; // Mover el frente al siguiente nodo
-
         if (frente == nullptr) { // Si la cola queda vacía, el final también debe ser nullptr
             final = nullptr;
         }
-
         nodo_a_eliminar->enemigo = nullptr; // Desvincular el enemigo del nodo antes de eliminar el nodo
         delete nodo_a_eliminar; // Liberar el nodo de la cola
-
         tamano--;
-
         return enemigo_desencolado; // Retornar el enemigo para que el juego lo use
     }
 
@@ -631,10 +629,10 @@ public:
                     string tipo_str = line.substr(pos_parentesis_abierto + 1, pos_parentesis_cerrado - (pos_parentesis_abierto + 1));
                     TipoHabitacion tipo = stringToTipoHabitacion(tipo_str);
 
-                    // Leer la línea de descripción (este es el cambio clave por el formato)
+                    // Leer la línea de descripción
                     string descripcion_habitacion;
                     getline(archivo, descripcion_habitacion);
-                    // Si la descripción está vacía, consume otra línea (puede haber líneas en blanco)
+                    // Si la descripción está vacía, consume otra línea
                     while (descripcion_habitacion.empty() && archivo.good()) {
                         getline(archivo, descripcion_habitacion);
                     }
@@ -998,6 +996,7 @@ void resolverEvento(Jugador* jugador, EventoPrincipal* evento, NodoArbol*& curre
         opcion_elegida = &evento->opcion_B;
     }
 
+    // Requisito especial que ocurre con el evento y la opción A.
     if ((evento->nombre == "Frasco extraño") && (eleccion == 'A')) {
         if (mi_arbol->nodos_del_arbol_por_id[34] != nullptr) {
             current_node->hijo_der = mi_arbol->nodos_del_arbol_por_id[34];
@@ -1057,7 +1056,6 @@ void juego(string archivo) {
 
     // Inicializar la posición actual del jugador
     NodoArbol* current_node = mi_arbol.raiz;
-    NodoArbol* previous_node = nullptr; // Para el requisito de volver al nodo anterior
 
     cout << "---------------------------------------------------------" << endl;
     cout << "--- Bienvenido a la Aventura de Estructuras de Datos! ---" << endl;
@@ -1074,6 +1072,7 @@ void juego(string archivo) {
         cout << "\n-------------------------------------------" << endl;
         cout << "--- " << current_node->habitacion->nombre << " ---" << endl;
         cout << current_node->habitacion->descripcion_habitacion << endl;
+        // Evitar mostrar la vida si el juego terminó.
         if (flag) cout << "Vida de " << nombre_protagonista << ": " << jugador.vida << " | Ataque: " << jugador.ataque << " | Precisión: " << jugador.precision << " | Recuperación: " << jugador.recuperacion << endl;
         cout << "-------------------------------------------" << endl;
 
@@ -1127,7 +1126,7 @@ void juego(string archivo) {
         }
 
         if (!jugador.estaVivo()) {
-            break; // Game Over
+            break; // Game over
         }
 
         // Mostrar opciones de movimiento
@@ -1163,9 +1162,6 @@ void juego(string archivo) {
         }
         cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpiar buffer
 
-
-        
-        previous_node = current_node; // Guardar el nodo actual antes de moverse
         if (eleccion_camino == 1) {
             current_node = current_node->hijo_izq;
         } else if (eleccion_camino == 2) {
