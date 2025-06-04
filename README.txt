@@ -13,7 +13,7 @@ Compilación:
 
 Para compilar el proyecto, abre una terminal en el directorio donde se encuentran los archivos `main.cpp` y `data.map`. Luego, ejecuta el siguiente comando:
 
-g++ main.cpp prototipo.cpp -o juego -Wall
+g++ tarea2.cpp -o juego -Wall
 
 Ejecución:
 
