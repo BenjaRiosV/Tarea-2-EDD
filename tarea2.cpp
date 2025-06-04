@@ -880,7 +880,7 @@ void iniciarCombate(Jugador* jugador, ColaEnemigos* enemigos_en_combate, ArbolTe
 
         bool ataque_exitoso = jugador->atacar(enemigo_actual);
         if (ataque_exitoso) {
-            cout << "Has golpeado a " << enemigo_actual->nombre << " por " << jugador->ataque << " de daño!" << endl;
+            cout << "\nHas golpeado a " << enemigo_actual->nombre << " por " << jugador->ataque << " de daño!" << endl;
             if (!enemigo_actual->estaVivo()) {
                 cout << enemigo_actual->nombre << " ha sido derrotado!" << endl;
                 enemigos_en_combate->dequeue(); // Sacar al enemigo derrotado de la cola
@@ -888,7 +888,7 @@ void iniciarCombate(Jugador* jugador, ColaEnemigos* enemigos_en_combate, ArbolTe
                 continue;
             }
         } else {
-            cout << "Tu ataque falló!" << endl;
+            cout << "\nTu ataque falló!" << endl;
         }
 
         cout << "\n" << nombre_protagonista << " | ", enemigos_en_combate->mostrarEnemigosEnCombate(); cout << endl;
