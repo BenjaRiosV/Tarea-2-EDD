@@ -878,10 +878,6 @@ void iniciarCombate(Jugador* jugador, ColaEnemigos* enemigos_en_combate, ArbolTe
         cout << "\n" << nombre_protagonista << " | ", enemigos_en_combate->mostrarEnemigosEnCombate(); cout << endl;
         cout << jugador->vida << " | ", enemigos_en_combate->mostrarVidaEnemigosEnCombate(); cout << endl;
 
-        // Turno del jugador
-        cout << "Presiona ENTER para atacar!" << endl;
-        cin.get(); // Espera una pulsación de tecla (Enter)
-
         bool ataque_exitoso = jugador->atacar(enemigo_actual);
         if (ataque_exitoso) {
             cout << "Has golpeado a " << enemigo_actual->nombre << " por " << jugador->ataque << " de daño!" << endl;
@@ -1037,9 +1033,6 @@ void resolverEvento(Jugador* jugador, EventoPrincipal* evento, NodoArbol*& curre
         jugador->curarVida(jugador->recuperacion);
         cout << "Vida actual de " << nombre_protagonista << ": " << jugador->vida << endl;
     }
-
-    cout << "Presiona ENTER para continuar..." << endl;
-    cin.get();
 }
 
 
